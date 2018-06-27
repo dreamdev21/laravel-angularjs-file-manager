@@ -1,0 +1,244 @@
+<section id="file-preview" ng-if="previewStatus.open" file-preview-container>
+    <div class="file-preview-inner">
+        <div class="top-bar">
+            <div class="logo"><img class="logo" src="assets/images/logo_light.png" alt="logo"/></div>
+            <div class="name"><i class="icon icon-{{fileTypes.getMimeIcon(preview.current.mime)}}"></i> {{utils.truncate(preview.current.name, 55)}}</div>
+            <div class="actions">
+                <md-button copy-link-to-clipboard>{{:: 'copyLink' | translate }}</md-button>
+                <md-button ng-click="selectedItems.share()">{{:: 'share' | translate }}</md-button>
+                <md-button class="md-primary md-raised" ng-click="selectedItems.download(preview.current)">{{:: 'download' | translate }}</md-button>
+                <md-button class="icon-button close-button"><md-icon md-font-icon="icon icon-cancel"></md-icon></md-button>
+            </div>
+        </div>
+        <div class="content">
+            <div class="preview"></div>
+            <div class="no-preview-available">
+                <div class="message">{{:: noFilePreview | translate }}</div>
+                <div class="buttons"><md-button class="md-raised md-primary" ng-click="selectedItems.download()"><i class="icon icon-download"></i> {{:: 'download' | translate }}</md-button></div>
+            </div>
+        </div>
+        <div class="total-items" ng-show="preview.total > 1">{{preview.currentIndex+1}} {{:: 'of' | translate }} {{preview.total}} {{:: 'items' | translate }}</div>
+        <div class="next-item"><i class="icon icon-right-open-mini"></i></div>
+        <div class="prev-item"><i class="icon icon-left-open-mini"></i></div>
+        <div class="preview-loader">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </div>
+</section>
+
+<upgrade-modal ng-if="utils.getSetting('enablePayments')"></upgrade-modal>
+
+<div id="dashboard">
+    <div class="flex-container" ng-controller="UploadController" ed-deselect-file>
+        <section id="left-col-upper">
+            <section id="left-col" class="deselect-file" ng-class=":: {closed: isSmallScreen}">
+                <i class="icon icon-cancel left-col-closer" left-column-closer ng-if=":: isSmallScreen"></i>
+
+                <div class="current-user" data-toggle="dropdown">
+                    <div class="avatar">
+                        <img class="img-responsive" ng-src="{{ users.getAvatar() }}"/>
+                    </div>
+                    <div class="user-email dropdown">
+                        {{ users.getUsernameForCurrentUser() }}
+                        <span class="caret"></span>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ng-if="users.current.isAdmin" ui-sref="admin.analytics"><a href=""><i class="icon icon-lock-filled"></i>{{:: 'adminArea' | translate }}</a></li>
+                            <li ng-click="users.showAccountSettingsModal($event, 'username')"><a href=""><i class="icon icon-pencil"></i> {{:: 'editUsername' | translate }}</a></li>
+                            <li ng-click="users.showAccountSettingsModal($event, 'avatar')"><a href=""><i class="icon icon-emo-sunglasses"></i> {{:: 'changeAvatar' | translate }}</a></li>
+                            <li ng-click="users.showAccountSettingsModal($event)"><a href=""><i class="icon icon-cog"></i> {{:: 'accountSettings' | translate }}</a></li>
+                            <li class="separator"></li>
+                            <li ng-if="users.current.stripe_id && utils.getSetting('enablePayments')" ng-click="$event.stopPropagation()">
+                                <a target="_blank" href="{{ baseUrl+'payments/invoices' }}"><i class="icon icon-doc-text"></i> {{:: 'invoices' | translate }}</a>
+                            </li>
+                            <li ng-click="users.logout()"><a href=""><i class="icon icon-login"></i> {{:: 'logOut' | translate }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="folders-list">
+                    <folder-tree></folder-tree>
+                </div>
+
+                <div class="categories-list">
+                    <div class="category" ui-sref=".trash" ui-sref-active="open" ed-trash-droppable><i class="icon icon-trash"></i> <span class="text">{{:: 'trash' | translate }}</span></div>
+                    <div class="category" ui-sref=".recent" ui-sref-active="open"><i class="icon icon-clock"></i> <span class="text">{{:: 'recent' | translate }}</span></div>
+                    <div class="category" ui-sref=".favorites" ui-sref-active="open"><i class="icon icon-star-filled"></i> <span class="text">{{:: 'favorites' | translate }}</span></div>
+                </div>
+
+                <div class="ad-container" ng-if="ad1" ng-bind-html="ad1"></div>
+
+                <space-usage></space-usage>
+            </section>
+            <section id="middle-col">
+                <nav class="navbar navbar-default" ng-controller="NavbarController">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" ui-sref="home">
+                                <img class="logo" src="assets/images/logo_dark.png" alt="logo"/>
+                            </a>
+                        </div>
+                        
+                        <ul class="navbar-nav upload-buttons">
+                            <li>
+                                <md-button class="md-primary md-raised" ng-file-select ng-multiple="true" ng-file-change="upload($files)" allow-dir="true" ed-tooltip="{{:: utils.folderUploadSupported ? 'uploadDndExpl' : 'uploadDndExplNoFolder' | translate }}">
+                                    <i class="icon icon-upload-cloud"></i> {{:: 'upload' | translate }}
+                                </md-button>
+                                <md-button class="md-primary md-raised" ng-click="folders.openNewModal($event)"><i class="icon icon-folder-add"></i></md-button>
+                            </li>
+                        </ul>
+
+                        <form class="navbar-form navbar-right navbar-search" ng-submit="goToSearchPage()">
+                            <div class="input-group">
+                                <md-autocomplete placeholder="{{:: 'searchFilesFolders' | translate }}" md-menu-class="search-suggestions" md-selected-item="selectedItem" md-selected-item-change="selectItem(a)"  md-delay="300" md-search-text="searchText" md-items="item in getSearchResults(searchText)" md-item-text="item.name">
+                                    <md-item-template>
+                                        <i ng-if="item.type == 'file'" class="icon icon-{{fileTypes.getMimeIcon(item.mime)}}"></i>
+                                        <i ng-if="item.type == 'folder'" class="icon icon-folder"></i>
+                                        <span md-highlight-text="searchText" md-highlight-flags="ig">{{ item.name }}</span>
+                                    </md-item-template>
+                                    <md-not-found>{{:: 'noMatches' | translate }}</md-not-found>
+                                </md-autocomplete>
+                                <div ng-click="goToSearchPage()" class="input-group-addon"><i class="icon icon-search"></i></div>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+                <section class="flex-fluid-container">
+                    <div class="middle-col-flex flex-fluid" ng-controller="ItemsController" ng-file-drop drag-over-class="dragover" ng-file-change="upload($files)" ng-multiple="true" allow-dir="true">
+
+                        <div class="sub-nav">
+                            <ul class="list-unstyled list-inline folder-path">
+                                <li ng-click="folders.open(folder)" ng-class="{ selected: folders.selected.name === folder }" ng-repeat="folder in folders.selected.path.split('/')">
+                                    <i class="icon icon-folder"></i> {{folder}}
+                                </li>
+                            </ul>
+                            <div class="action-buttons">
+                                <md-button ng-if=":: isSmallScreen" class="left-col-toggler">{{:: 'Folders' | translate }} <i class="icon icon-folder"></i></md-button>
+                                <md-button id="more-options" ed-more-options-menu ng-disabled="!selectedItems.getLength()">{{:: 'actions' | translate }} <i class="icon icon-ellipsis-vert"></i></md-button>
+                                <div class="dropdown">
+                                    <md-button data-toggle="dropdown">{{:: 'sort' | translate }} <i class="icon icon-sort-name-up"></i></md-button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-click="changeOrder('name')" ng-class="{ selected: order.prop == 'name' }"><a href="" translate>name</a></li>
+                                        <li ng-click="changeOrder('-file_size')" ng-class="{ selected: order.prop == '-file_size' }"><a href="" translate>sizeBigFirst</a></li>
+                                        <li ng-click="changeOrder('file_size')" ng-class="{ selected: order.prop == 'file_size' }"><a href="" translate>sizeSmallFirst</a></li>
+                                        <li ng-click="changeOrder('-created_at')" ng-class="{ selected: order.prop == '-created_at' }"><a href="" translate>dateUploaded</a></li>
+                                    </ul>
+                                </div>
+                                <md-button ng-click="toggleSelectedView()">{{:: 'view' | translate }} <i ng-class="selectedView === 'grid' ? 'icon-th' : 'icon-th-large'" class="icon"></i></md-button>
+                                <md-button ed-toggle-info-panel ng-class="{ active: rightPanel.open }">{{:: 'activity' | translate }} <i class="icon icon-info-circled"></i></md-button>
+                            </div>
+                        </div>
+
+                        <div class="ad-container" ng-if="ad2" ng-bind-html="ad2"></div>
+
+                        <div ui-view class="files-view" afkl-image-container items-selectable infinite-scroll="paginateFiles()"></div>
+                        <div id="files-spinner" ng-if="ajaxProgress.files"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div>
+                    </div>
+                </section>
+            </section>
+            <section id="right-col" ng-controller="RightPanelController" ng-class="{ closed: !rightPanel.open }">
+                <div class="right-panel-inner" ng-if="dashboardState.loaded && folders.selected">
+                    <div class="ad-container" ng-if="ad3" ng-bind-html="ad3"></div>
+                    <div class="right-panel-header"><span>{{:: 'recentActivity' | translate }}</span> <i class="icon icon-cancel close-icon-wrapper" ed-panel-closer="#right-col"></i></div>
+
+                    <div id="activity-tab">
+                        <div ng-repeat="item in activity.all | activityRelativeToContext" class="activity-list-item">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="">
+                                        <img class="media-object" ng-src="{{:: users.getAvatar() }}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <strong>{{:: item.user }}</strong>
+                                        {{:: item.action | translate }} {{:: item.items.length }}
+                                        <span ng-if="item.items.length">{{:: item.itemName | translate }}</span>
+                                    </div>
+                                    <div>{{:: toRelativeTime(item.happenedAt) }}</div>
+                                    <div class="items-list">
+                                        <div class="item" ng-repeat="affected in item.items"><i ng-if="affected.icon" class="icon icon-{{:: affected.icon }}"></i> {{:: affected.name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <div id="upload-progress-panel" class="md-whiteframe-z2" ed-upload-panel-visibility>
+            <div class="header">
+                <i class="icon icon-upload-cloud"></i>
+                <div class="text">
+                    <span ng-show="!uploadsInProgress">{{:: 'uploadsComplete' | translate }}</span>
+                    <span ng-show="uploadsInProgress">{{:: 'uploadsInProgress' | translate }}</span>
+                </div>
+                <div class="close-panel"><i class="icon icon-cancel"></i></div>
+            </div>
+            <table class="table table-condensed files-list">
+                <tbody>
+                    <tr ng-repeat="file in uploadHistory">
+                        <td class="file-name"><i class="icon icon-{{ fileTypes.getMimeIcon(file.type) }}"></i><div class="name">{{ file.name }}</div></td>
+                        <td class="file-size">
+                            <span ng-if="!file.uploaded">{{ file.bytesUploaded }} / </span>
+                            {{ utils.formatFileSize(file.size) }}
+                        </td>
+                        <td class="file-upload-progress">
+                            <md-progress-linear ng-show="!file.uploaded" md-mode="determinate" ng-value="file.percentageUploaded"></md-progress-linear>
+                            <div ng-show="file.uploaded">
+                                <div ng-show="!file.rejected" class="uploaded">{{:: 'uploaded' | translate }}</div>
+                                <div ng-show="file.rejected" class="rejected">
+                                    {{:: 'rejected' | translate }}
+                                    <i class="icon icon-info-circled" ng-if="file.rejectReason" ed-tooltip="{{:: file.rejectReason}}" tooltip-placement="right"></i>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<ul id="context-menu" ed-context-menu></ul>
+
+<div ng-include="'assets/views/modals.html'"></div>
+
+<script type="application/ng-template" id="confirm-photo-delete-modal">
+    <md-dialog class="md-modal md-modal-wide confirm-photo-delete-modal">
+        <div class="md-modal-header">
+            <h1>{{:: 'deleteForever' | translate }}</h1>
+            <div ng-click="utils.closeModal()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+
+        <p>{{:: 'confirmPermaDelete' | translate }}</p>
+        <strong>{{:: 'permaDeleteWarning' | translate }}</strong>
+
+        <div class="buttons">
+            <md-button ng-click="utils.closeModal()">{{:: 'cancel' | translate }}</md-button>
+            <md-button ng-click="delete()" class="md-raised md-primary">{{:: 'delete' | translate }}</md-button>
+        </div>
+    </md-dialog>
+</script>
+
+<script type="application/ng-template" id="new-folder-name-modal">
+    <md-dialog class="md-modal md-modal-wide folder-name-modal">
+        <div class="md-modal-header">
+            <h1 ng-if="create">{{:: 'createNewFolder' | translate }}</h1>
+            <h1 ng-if="rename">{{:: 'rename' | translate }} {{ folders.folderNameModel.old }} {{:: 'folder' | translate }}</h1>
+            <div ng-click="folders.closeModal()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+        <form ng-submit="create ? folders.createNew() : folders.rename(folders.folderNameModel.old)">
+            <md-input-container>
+                <label for="folder-name">{{:: 'name' | translate }}</label>
+                <input id="folder-name" type="text" ng-model="folders.folderNameModel.new">
+                <div class="md-modal-error"></div>
+            </md-input-container>
+
+            <div class="buttons">
+                <md-button type="button" ng-click="folders.closeModal()">{{:: 'cancel' | translate }}</md-button>
+                <md-button type="submit" ng-disabled="!folders.folderNameModel.new" class="md-raised md-primary">{{:: create ? 'create' : 'rename' | translate }}</md-button>
+            </div>
+        </form>
+    </md-dialog>
+</script>

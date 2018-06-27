@@ -1,0 +1,71 @@
+<section ng-controller="UsersController">
+    <div class="material-table" ng-controller="AdminTableController">
+        <div class="header" ng-if="!selectedItems.length">
+            <div class="caption">
+                <md-button class="md-primary md-raised" ng-click="showCreateUserModal($event)">{{:: 'add' | translate }}</md-button>
+            </div>
+            <div class="controls">
+                <div class="search">
+                    <input placeholder="{{:: 'search' | translate }}" type="text" ng-model="params.query" ng-model-options="{ debounce: 300, updateOn: 'keyup' }">
+                    <i class="icon icon-search"></i>
+                </div>
+            </div>
+        </div>
+        <div class="selected-header" ng-if="selectedItems.length">
+            <div class="caption">{{ selectedItems.length }} {{:: 'usersSelected' | translate }}</div>
+            <div class="controls">
+                <i class="icon icon-trash" ng-click="deleteUsers(selectedItems)"></i>
+            </div>
+        </div>
+        <div class="table table-hover">
+            <div class="table-row table-head">
+                <div class="table-col small-col align-left">
+                    <md-checkbox aria-label="select all users" ng-checked="selectedItems.length === $parent.items.length" ng-click="toggleAllItems()"></md-checkbox>
+                </div>
+                <div class="table-col image">{{:: 'avatar' | translate }}</div>
+                <div class="table-col name-col">{{:: 'email' | translate }}</div>
+                <div class="table-col">{{:: 'username' | translate }}</div>
+                <div class="table-col">{{:: 'firstName' | translate }}</div>
+                <div class="table-col">{{:: 'lastName' | translate }}</div>
+                <div class="table-col">{{:: 'gender' | translate }}</div>
+                <div class="table-col small-col align-right"></div>
+            </div>
+
+            <div class="table-body">
+                <div class="table-row" dir-paginate="user in $parent.items | itemsPerPage: params.itemsPerPage" total-items="totalItems" current-page="params.page" ng-class="{ selected: isItemSelected(user) }" ng-click="select(user)">
+                    <div class="table-col small-col align-left">
+                        <md-checkbox aria-label="select user" ng-checked="isItemSelected(user)"></md-checkbox>
+                    </div>
+                    <div class="table-col image"><img ng-src="{{ users.getAvatar(user) }}"/></div>
+                    <div class="table-col name-col">{{ utils.isDemo ? 'Hidden on Demo Site' : user.email }}</div>
+                    <div class="table-col">{{ user.username || '-' }}</div>
+                    <div class="table-col">{{ user.first_name || '-' }}</div>
+                    <div class="table-col">{{ user.last_name || '-' }}</div>
+                    <div class="table-col">{{ user.gender || '-' }}</div>
+                    <div class="table-col small-col align-right"><i class="icon icon-pencil" ng-click="showUpdateUserModal(user, $event); $event.stopPropagation()" ed-tooltip="{{:: 'editUser' | translate }}"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <section class="controls">
+                <div class="per-page">
+                    {{:: 'rowsPerPage' | translate }}
+                    <md-select ng-model="params.itemsPerPage">
+                    <md-option value="5">5</md-option>
+                    <md-option value="10">10</md-option>
+                    <md-option value="15">15</md-option>
+                    <md-option value="20">20</md-option>
+                    <md-option value="30">30</md-option>
+                    <md-option value="100">100</md-option>
+                </md-select>
+            </div>
+            <div class="meta">
+                1-{{ params.itemsPerPage }} {{ 'of' | translate }} {{ totalItems }}
+            </div>
+            <dir-pagination-controls></dir-pagination-controls>
+        </section>
+    </div>
+
+    <md-progress-circular class="ajax-spinner" md-mode="indeterminate" ng-if="usersAjaxInProgress"></md-progress-circular>
+</div>
+</section>

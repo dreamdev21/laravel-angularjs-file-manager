@@ -1,0 +1,95 @@
+#upload-progress-panel {
+    width: 650px;
+    max-width: 100%;
+    min-height: 36px;
+    max-height: 70%;
+    overflow: auto;
+    position: absolute;
+    background-color: #fff;
+    bottom: 0;
+    right: 20%;
+    display: none;
+    z-index: 3;
+
+    &.open {
+        display: block;
+    }
+
+    .close-panel {
+        float: right;
+        line-height: 1;
+        font-size: 20px;
+        padding: 1px 0;
+        cursor: pointer;
+        background-color: @primary-palette;
+
+        > i {
+            padding-left: 1px;
+        }
+
+        &:hover {
+            background-color: darken(@primary-palette, 10%);
+        }
+    }
+
+    > .header {
+        background-color: @left-col-bg;
+        color: #fff;
+        padding: 7px;
+
+        > .text {
+            display: inline-block;
+        }
+
+        > i {
+            margin: 0 7px 0 3px;
+            font-size: 16px;
+        }
+    }
+
+    .table {
+        table-layout: fixed;
+        margin-bottom: 0;
+    }
+
+    .file-name {
+        width: 280px;
+
+        > .name {
+            width: 88%;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            vertical-align: top;
+        }
+
+        > i {
+            color: @primary-palette;
+            font-size: 15px;
+            height: 14px;
+            line-height: 18px;
+            margin-right: 10px;
+        }
+    }
+
+    .file-size {
+        width: 25%;
+        text-align: center;
+    }
+
+    .file-upload-progress {
+        width: 30%;
+        padding-right: 10px;
+        text-align: right;
+    }
+
+    .rejected {
+        color: @brand-danger;
+        padding-left: 5px;
+    }
+
+    .uploaded {
+        color: @brand-success;
+    }
+}

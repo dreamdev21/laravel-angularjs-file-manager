@@ -1,0 +1,253 @@
+@media (max-width: @screen-sm) {
+
+    #middle-col .flex-fluid-container {
+        height: ~"calc(100% - 60px)" !important;
+    }
+
+    #middle-col {
+        max-width: 100% !important;
+    }
+
+    #login-page .login-container {
+        width: 90%;
+    }
+
+    #context-menu {
+        width: ~"calc(100% - 20px)";
+        left: 10px !important;
+
+        .context-menu-item {
+            padding: 10px;
+        }
+    }
+
+    .md-modal {
+        min-width: 90%;
+
+        &.md-modal-wide {
+            min-width: 90%;
+            max-width: 100%;
+        }
+    }
+
+    #home {
+        .navbar-header {
+            display: none;
+        }
+
+        .navbar-nav {
+            margin-top: 0;
+            display: flex;
+
+            > li {
+                flex: 1 1 auto;
+                text-align: center;
+            }
+        }
+
+        .content {
+            .home-jumbotron {
+                h1 {
+                    font-size: 28px;
+                }
+
+                p {
+                    font-size: 18px;
+                    font-weight: 200;
+                }
+            }
+        }
+    }
+
+    #file-preview {
+        > .file-preview-inner {
+            > .top-bar {
+                height: auto;
+                padding: 12px 3px;
+
+                > .logo, > .name {
+                    display: none;
+                }
+
+                > .actions {
+                    float: none;
+                    position: static;
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                    justify-content: center;
+
+                    .md-button {
+                        padding: 0 10px;
+                        font-size: 13px;
+                    }
+
+                    .close-button {
+                        margin-left: 5px;
+                        padding: 0 5px;
+                    }
+                }
+            }
+
+            .image-preview-container {
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            .total-items {
+                bottom: 1px;
+            }
+        }
+    }
+
+    #left-col {
+        position: absolute;
+        width: 90%;
+        max-width: @left-col-width;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        .md-whiteframe-z5();
+    }
+
+    #upload-progress-panel {
+        width: 100% !important;
+        right: 0 !important;
+
+        .file-name {
+            width: 150px !important;
+
+            > .name {
+                width: 79% !important;
+            }
+        }
+    }
+
+    #dashboard {
+        .dropzone-inner, .dropzone-outter {
+           display: none;
+        }
+
+        .sub-nav {
+            > .folder-path {
+                width: 100%;
+                border-bottom: 1px solid @dashboard-border-color;
+                overflow: hidden;
+            }
+
+            > .action-buttons {
+                width: 100%;
+                text-align: center;
+                
+                span {
+                    display: none;
+                }
+
+                i {
+                    font-size: 21px;
+                }
+            }
+        }
+
+        .upload-buttons {
+            margin-top: 11px;
+        }
+
+        .phone-no-photos {
+            width: 100%;
+            left: 0;
+            top: 50%;
+            position: absolute;
+            text-align: center;
+            color: @right-col-color;
+
+            > h1 {
+                font-size: 18px;
+
+                > .icon {
+                    color: @primary-palette;
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .user-items {
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .material-table {
+            .table-col, .search {
+                display: none;
+            }
+
+            .show-phone {
+                display: flex;
+            }
+
+            .image {
+                display: flex;
+                margin: 0;
+            }
+
+            .per-page, .meta {
+                display: none;
+            }
+
+            .pagination {
+                margin-right: 5px;
+
+                li > a {
+                    border: 1px solid @table-border-color;
+                    border-radius: 3px;
+                    padding: 10px 15px;
+                }
+            }
+        }
+
+        #details-tab .actions-row .icon-wrapper {
+            margin: 0;
+        }
+
+        .navbar {
+            height: 60px;
+            min-height: 60px;
+
+            .navbar-header {
+                display: none;
+            }
+
+            .navbar-form {
+                float: left;
+                width: 100%;
+                border: none;
+                margin: 10px 0;
+                padding: 0;
+            }
+
+            .navbar-right {
+                display: none;
+            }
+        }
+        
+        #admin .navbar {
+            .navbar-header {
+                display: block;
+            }
+
+            .navbar-brand {
+                padding-left: 15px;
+            }
+
+            .logo {
+                width: 115px;
+            }
+
+            .navbar-toggle {
+                float: left;
+                margin: 14px 0 14px 20px;
+            }
+        }
+    }
+}

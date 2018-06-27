@@ -1,0 +1,79 @@
+<section id="login-page">
+
+    <demo-info-container id="demo-container" ng-if="utils.isDemo"></demo-info-container>
+
+    <div ng-class="{ loading: loading }" class="container login-container">
+        <form ng-submit="submit()" ed-login-register-validator>
+
+            <a ui-sref="home"><img ng-src="{{ baseUrl + 'assets/images/logo_dark.png' }}" alt="logo" class="logo"></a>
+
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <div class="message"></div>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" name="email" type="text" placeholder="{{ 'email' | translate }}" ng-model="credentials.email">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="password" type="password" placeholder="{{ 'password' | translate }}" ng-model="credentials.password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="repeatPassword" type="password" placeholder="{{ 'repeatPassword' | translate }}" ng-model="credentials.password_confirmation">
+            </div>
+
+            <div class="register-btns-container">
+                <div class="social-icons" ng-controller="SocialLoginController">
+                    <div ng-click="loginWith('facebook')" class="social-icon facebook" ed-tooltip="{{:: 'loginWithFacebook' | translate }}"></div>
+                    <div ng-click="loginWith('google')" class="social-icon googleplus" ed-tooltip="{{:: 'loginWithGoogle' | translate }}"></div>
+                    <div ng-click="loginWith('twitter')" class="social-icon twitter" ed-tooltip="{{:: 'loginWithTwitter' | translate }}"></div>
+                </div>
+
+                <md-button type="submit" class="md-primary md-raised">{{ 'register' | translate }}</md-button>
+            </div>
+
+            <p>{{ 'alreadyHaveAccount' | translate }} <a ui-sref="login">{{ 'logInHere' | translate }}</a></p>
+
+            <div class="loader" ng-show="loading"><md-progress-circular md-mode="indeterminate"></md-progress-circular></div>
+        </form>
+    </div>
+</section>
+
+<script type="text/ng-template" id="assets/views/modals/request-email-modal.html">
+    <md-dialog class="md-modal md-modal-wide request-email-modal">
+        <div class="md-modal-header">
+            <h1>{{ 'enterYourTwitterEmail' | translate }}</h1>
+            <div ng-click="closeModal()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+        <md-input-container>
+            <label>{{ 'email' | translate }}</label>
+            <input type="email" ng-model="credentials.email">
+        </md-input-container>
+
+        <div class="buttons">
+            <md-button ng-click="closeModal()">{{ 'cancel' | translate }}</md-button>
+            <md-button ng-click="createAndLoginUser()" ng-disabled="!credentials.email" class="md-primary md-raised">{{ 'login' | translate }}</md-button>
+        </div>
+    </md-dialog>
+</script>
+
+<script type="text/ng-template" id="assets/views/modals/request-password-modal.html">
+    <md-dialog class="md-modal md-modal-wide limit-width request-password-modal">
+        <div class="md-modal-header">
+            <h1>{{ 'enterYourPassword' | translate }}</h1>
+            <div ng-click="closeModal()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+
+        <div class="sub-header">{{:: 'requestPassword' | translate }}</div>
+
+        <md-input-container>
+            <label>{{ 'password' | translate }}</label>
+            <input type="password" ng-model="credentials.password">
+            <div ng-if="errorMessage" class="md-modal-error" style="order: 2">{{ errorMessage }}</div>
+        </md-input-container>
+
+        <div class="buttons">
+            <md-button ng-click="closeModal()">{{ 'cancel' | translate }}</md-button>
+            <md-button ng-click="connectAccounts()" ng-disabled="!credentials.password" class="md-primary md-raised">{{ 'connect' | translate }}</md-button>
+        </div>
+    </md-dialog>
+</script>

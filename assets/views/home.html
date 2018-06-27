@@ -1,0 +1,57 @@
+<div id="home" ng-controller="UploadController">
+    <div class="overlay">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" ui-sref="home">
+                        <img class="logo" src="assets/images/logo_light.png" alt="logo"/>
+                    </a>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right" ng-show="!users.current">
+                    <li><a ui-sref="register" ng-if="utils.getSetting('enableRegistration', true)">{{:: 'register' | translate }}</a></li>
+                    <li><a ui-sref="login" class="login-button">{{:: 'login' | translate }}</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right" ng-show="users.current">
+                    <li class="logged-in-container" data-toggle="dropdown">
+                        <div class="dropdown">
+                            <img ng-src="{{ users.getAvatar() }}"/>
+                            <a href="">{{ users.getUsernameForCurrentUser() }}</a>
+                            <span class="caret"></span>
+                            <ul class="dropdown-menu">
+                                <li ng-if="users.current.isAdmin" ui-sref="admin.analytics"><a href=""><i class="icon icon-lock-filled"></i>{{:: 'adminArea' | translate }}</a></li>
+                                <li ui-sref="dashboard.folders"><a href=""><i class="icon icon-gauge"></i>{{:: 'dashboard' | translate }}</a></li>
+                                <li ng-click="users.showAccountSettingsModal($event, 'username')"><a href=""><i class="icon icon-pencil"></i> {{:: 'editUsername' | translate }}</a></li>
+                                <li ng-click="users.showAccountSettingsModal($event, 'avatar')"><a href=""><i class="icon icon-emo-sunglasses"></i> {{:: 'changeAvatar' | translate }}</a></li>
+                                <li ng-click="users.showAccountSettingsModal($event)"><a href=""><i class="icon icon-cog"></i> {{:: 'accountSettings' | translate }}</a></li>
+                                <li class="separator"></li>
+                                <li ng-if="users.current.stripe_id" ng-click="$event.stopPropagation()">
+                                    <a target="_blank" href="{{ baseUrl+'payments/invoices' }}"><i class="icon icon-doc-text"></i> {{:: 'invoices' | translate }}</a>
+                                </li>
+                                <li ng-click="users.logout()"><a href=""><i class="icon icon-login"></i> {{:: 'logOut' | translate }}</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="content">
+
+            <demo-info-container id="demo-container" ng-if="utils.isDemo"></demo-info-container>
+
+            <div class="home-jumbotron">
+                <h1>{{:: utils.getSetting('homeTagline')  }}</h1>
+                <p>{{:: utils.getSetting('homeByline')  }}</p>
+                <md-button ui-sref="register" class="md-primary md-raised" ng-if="utils.getSetting('enableRegistration', true)">{{:: utils.getSetting('homeButtonText') }}</md-button>
+                <md-button ui-sref="login" class="md-primary md-raised" ng-if="!utils.getSetting('enableRegistration', true)">{{:: 'loginNow' | translate  }}</md-button>
+            </div>
+
+            <div class="ad-container" ng-if="ad1" ng-bind-html="ad1"></div>
+        </div>
+
+        <div ng-include="baseUrl+'assets/views/modals.html'"></div>
+    </div>
+</div>

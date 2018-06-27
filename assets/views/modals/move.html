@@ -1,0 +1,16 @@
+<script type="text/ng-template" id="assets/views/modals/move.html">
+    <md-dialog class="md-modal move-photo-modal">
+        <div class="md-modal-header">
+            <h1>{{:: 'moveTo' | translate }}</h1>
+            <div ng-click="files.closeModal()" class="md-close-modal"><i class="mdi mdi-close"></i></div>
+        </div>
+        <md-select placeholder="Select a Folder" ng-model="selectedFolder">
+            <md-option ng-repeat="folder in folders.available" ng-if="selectedItems.first('type') === 'file' && folder.id != selectedItems.first('folder_id')" value="{{ folder.id }}">{{ folder.name }}</md-option>
+            <md-option ng-repeat="folder in folders.available" ng-if="selectedItems.first('type') === 'folder' && folder.id != selectedItems.first('id')" value="{{ folder.id }}">{{ folder.name }}</md-option>
+        </md-select>
+        <div class="buttons">
+            <md-button ng-click="files.closeModal()">{{:: 'cancel' | translate }}</md-button>
+            <md-button ng-click="move(selectedFolder)" class="md-raised md-primary">{{:: 'move' | translate }}</md-button>
+        </div>
+    </md-dialog>
+</script>

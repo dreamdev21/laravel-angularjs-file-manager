@@ -1,0 +1,45 @@
+<script type="text/ng-template" id="assets/views/modals/share.html">
+    <md-dialog class="md-modal md-modal-wide share-modal">
+        <div class="md-modal-header">
+            <h1>{{:: 'share' | translate }} {{:: shareable.name }} <span ng-if="rawType == 'folder'">{{ type }}</span></h1>
+            <div ng-click="closeModal()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+
+        <div class="input-group">
+            <input class="form-control" readonly="true" type="text" ng-model="link" ed-select-on-click id="share-modal-input">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" copy-link-to-clipboard>{{:: 'copyLink' | translate }}</button>
+            </span>
+        </div>
+
+        <ed-share-icons></ed-share-icons>
+
+        <form class="email-container" name="form">
+            <p>{{:: 'sendLinkViaEmail' | translate }}:</p>
+            <tags-input type="email" name="emails" ng-model="emails" placeholder="{{:: '+email' | translate }}" add-on-space="true" on-tag-adding="utils.validateEmail($tag)"></tags-input>
+            <textarea ng-model="emailMessage" columns="1" rows="3" placeholder="{{:: 'messageOptional' | translate }}"></textarea>
+        </form>
+
+        <section class="password-container" ng-if="passwordContainerVisible">
+            <md-input-container>
+                <label>{{:: 'password' | translate }}</label>
+                <input type="password" ng-model="password.value">
+            </md-input-container>
+
+            <div class="buttons">
+                <md-button ng-click="closePasswordContainer()">{{:: 'cancel' | translate }}</md-button>
+                <md-button ng-disabled="!password.value" ng-click="addPassword()" class="md-primary md-raised">{{:: 'add' | translate }}</md-button>
+            </div>
+        </section>
+
+        <div class="buttons" ng-hide="passwordContainerVisible">
+            <div class="password-info">
+                <i class="mdi mdi-lock-open"></i>
+                <div ng-if="!shareable.password">{{:: 'notPassProtected' | translate }} {{:: type }}. <span ng-click="togglePasswordContainer()" class="link">{{:: 'addPassword' | translate }}</span></div>
+                <div ng-if="shareable.password">{{:: 'this' | translate }} {{:: type }} {{:: 'passProtected' | translate }}. <span ng-click="removePassword()" class="link">{{:: 'remove' | translate }}</span></div>
+            </div>
+            <md-button ng-click="closeModalAndSendEmails()" class="md-raised md-primary">{{:: 'done' | translate }}</md-button>
+            <md-progress-circular ng-if="mailSendInProgress" md-mode="indeterminate" class="mail-spinner"></md-progress-circular>
+        </div>
+    </md-dialog>
+</script>

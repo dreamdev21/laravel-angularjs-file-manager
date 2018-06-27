@@ -1,0 +1,73 @@
+<div ng-controller="FilesController">
+    <div class="material-table" ng-controller="AdminTableController">
+        <div class="header" ng-if="!selectedItems.length">
+            <div class="caption">{{:: 'files' | translate }}</div>
+            <div class="controls">
+                <div class="search">
+                    <input placeholder="{{:: 'search' | translate }}" type="text" ng-model="params.query" ng-model-options="{ debounce: 300, updateOn: 'keyup' }">
+                    <i class="icon icon-search"></i>
+                </div>
+            </div>
+        </div>
+        <div class="selected-header" ng-if="selectedItems.length">
+            <div class="caption">{{ selectedItems.length }} {{:: 'filesSelected' | translate }}</div>
+            <div class="controls">
+                <i class="icon icon-trash" ng-click="deleteFiles(selectedItems)"></i>
+            </div>
+        </div>
+        <div class="table table-hover">
+            <div class="table-row table-head">
+                <div class="table-col small-col align-left">
+                    <md-checkbox aria-label="select all users" ng-checked="selectedItems.length === $parent.items.length" ng-click="toggleAllItems()"></md-checkbox>
+                </div>
+                <div class="table-col name-col">{{:: 'name' | translate }}</div>
+                <div class="table-col user-col">{{:: 'user' | translate }}</div>
+                <div class="table-col size-col">{{:: 'size' | translate }}</div>
+                <div class="table-col id-col">{{:: 'preview' | translate }}</div>
+                <div class="table-col pass-col">{{:: 'password' | translate }}</div>
+                <div class="table-col date-col">{{:: 'uploadedAt' | translate }}</div>
+            </div>
+
+            <div class="table-body">
+                <div class="table-row" dir-paginate="file in $parent.items | itemsPerPage: params.itemsPerPage" total-items="totalItems" current-page="params.page"  ng-class="{ selected: isItemSelected(file) }" ng-click="select(file)">
+                    <div class="table-col small-col align-left">
+                        <md-checkbox aria-label="select file" ng-checked="isItemSelected(file)"></md-checkbox>
+                    </div>
+                    <div class="table-col name-col show-phone">
+                        <div>
+                            <i ng-if="file.type == 'file'" class="icon icon-{{fileTypes.getMimeIcon(file.mime)}}"></i>
+                            <i ng-if="file.type == 'folder'" class="icon icon-folder"></i>
+                            <span>{{ utils.truncate(file.name, 50) }}</span>
+                        </div>
+                    </div>
+                    <div class="table-col user-col">{{ utils.isDemo ? 'Hidden on Demo site' : file.user.email }}</div>
+                    <div class="table-col size-col">{{ utils.formatFileSize(file.file_size) }}</div>
+                    <div class="table-col id-col"><a target="_blank" href="{{ baseUrl+'#/view/file/'+file.share_id+'/'+file.name }}"><i class="icon icon-eye"></i></a></div>
+                    <div class="table-col pass-col" translate>{{ file.password ? 'yes' : 'no' }}</div>
+                    <div class="table-col date-col">{{ utils.formatDate(file.created_at) }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="controls">
+                <div class="per-page">
+                    {{:: 'rowsPerPage' | translate }}
+                    <md-select ng-model="params.itemsPerPage">
+                    <md-option value="5">5</md-option>
+                    <md-option value="10">10</md-option>
+                    <md-option value="15">15</md-option>
+                    <md-option value="20">20</md-option>
+                    <md-option value="30">30</md-option>
+                    <md-option value="100">100</md-option>
+                </md-select>
+            </div>
+            <div class="meta">
+                1-{{ params.itemsPerPage }} {{ 'of' | translate }} {{ totalItems }}
+            </div>
+            <dir-pagination-controls></dir-pagination-controls>
+        </div>
+    </div>
+
+    <md-progress-circular class="ajax-spinner" md-mode="indeterminate" ng-if="itemsAjaxInProgress"></md-progress-circular>
+</div>
+</div>

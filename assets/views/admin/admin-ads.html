@@ -1,0 +1,60 @@
+<div class="settings-container full-width">
+    <form ng-submit="updateSettings()">
+        <div class="settings-panel" id="view">
+            <div class="settings-panel-header">Files and Folders Preview Page</div>
+            <div class="settings-panel-body">
+                <md-input-container>
+                    <label>Slot #1</label>
+                    <textarea ng-model="settings.ad_preview_slot_1" columns="1"></textarea>
+                    <p>This ad will appear above above the file preview. Best size 800x150 or responsive.</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Slot #2</label>
+                    <textarea ng-model="settings.ad_preview_slot_2" columns="1"></textarea>
+                    <p>This ad will appear in the sidebar when one of the file or folder is viewed via link. Best size - 350px width or responsive.</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised">{{:: 'update' | translate }}</md-button>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="dashboard">
+            <div class="settings-panel-header">Dashboard</div>
+            <div class="settings-panel-body">
+                <md-input-container>
+                    <label>Slot #1</label>
+                    <textarea ng-model="settings.ad_dashboard_slot_1" columns="1"></textarea>
+                    <p>This ad will appear at the bottom of left sidebar in dashboard. Best size - width smaller then 220px.</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Slot #2</label>
+                    <textarea ng-model="settings.ad_dashboard_slot_2" columns="1"></textarea>
+                    <p>This ad will appear above all files in the dashboard. Best size - responsive, but any will do.</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Slot #3</label>
+                    <textarea ng-model="settings.ad_dashboard_slot_3" columns="1"></textarea>
+                    <p>This ad will appear in the right column in dashboard. Best size - width smaller then 365px.</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised">{{:: 'update' | translate }}</md-button>
+            </div>
+        </div>
+
+        <div class="settings-panel" id="home">
+            <div class="settings-panel-header">Homepage</div>
+            <div class="settings-panel-body">
+                <md-input-container>
+                    <label>Slot #1</label>
+                    <textarea ng-model="settings.ad_home_slot_1" columns="1"></textarea>
+                    <p>This ad will on the homepage (if enabled) right below navigation bar. Best size - responsive or ~800px width.</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised">{{:: 'update' | translate }}</md-button>
+            </div>
+        </div>
+    </form>
+</div>

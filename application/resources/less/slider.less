@@ -1,0 +1,92 @@
+.ed-range-slider {
+    position: relative;
+    height: 48px;
+}
+
+.ui-slider {
+    position: absolute;
+    width: 100%;
+    top: 23px;
+    text-align: left;
+    background: darken(@main-gray, 20%);
+    cursor: pointer;
+
+    &.ui-state-disabled {
+        background-color: #BDBDBD;
+
+        .ui-slider-range, .ui-slider-handle {
+            background-color: #BDBDBD;
+        }
+
+        .ui-slider-handle {
+            transform: scale(.3);
+            background-color: rgba(0,0,0,0.26);
+            border: 1px solid darken(#BDBDBD, 80%);
+        }
+    }
+
+}
+
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    -ms-touch-action: none;
+    touch-action: none;
+    outline: none;
+    background: @accent-color;
+    top: -18px;
+    margin-left: -19px;
+    border-radius: 38px;
+    transform: scale(.45);
+    transition: transform .1s linear;
+    cursor: pointer;
+
+    &.ui-state-hover {
+        transform: scale(.55);
+    }
+
+    &.ui-state-focus {
+        transform: scale(.70);
+        border: 3px solid lighten(@accent-color, 10%);
+    }
+}
+
+.ui-slider .ui-slider-range {
+    position: absolute;
+    z-index: 1;
+    font-size: .7em;
+    display: block;
+    border: 0;
+    background-position: 0 0;
+    background: @accent-color;
+    border-radius: 5px;
+}
+
+/* For IE8 - See #6727 */
+.ui-slider.ui-state-disabled .ui-slider-handle,
+.ui-slider.ui-state-disabled .ui-slider-range {
+    filter: inherit;
+}
+
+.ui-slider-horizontal {
+    height: 2px;
+}
+.ui-slider-horizontal .ui-slider-range {
+    top: 0;
+    height: 100%;
+}
+.ui-slider-horizontal .ui-slider-range-min {
+    left: 0;
+}
+.ui-slider-horizontal .ui-slider-range-max {
+    right: 0;
+}
+
+.slider-extender {
+    height: 48px;
+    position: absolute;
+    width: 100%;
+    top: -20px;
+}

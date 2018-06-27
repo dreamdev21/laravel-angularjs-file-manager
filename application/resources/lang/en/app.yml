@@ -1,0 +1,378 @@
+#Login Page
+wrongCredentials: Wrong email address or password
+noAccount: Don't have an account?
+registerHere: Register here.
+login: Login
+password: Password
+email: Email
+enterYourTwitterEmail: Please enter your twitter email
+userWithEmailExists: User with this email already exists.
+enterYourPassword: Enter your password
+requestPassword: An account with this email address already exists, if you want to connect the two accounts please enter existing accounts password in the field below.
+wrongPassword: Password seems to be incorrect, please try again.
+connect: Connect
+genericSocialError: An error occured, please try again later.
+rememberMe: Remember me
+loginWithFacebook: Login with facebook
+loginWithTwitter: Login with twitter
+loginWithGoogle: Login with google
+orLoginWith:  Or login with:
+
+#Register Page
+alreadyHaveAccount: Already have an account?
+repeatPassword: Repeat Password
+logInHere: Login in here.
+register: Register
+
+#Dashboard
+sort: Sort
+actions: Actions
+cardNumber: Card number
+expMonth: Expiration Month
+expYear: Expiration Year
+securityCode: Security Code
+expirationDate: Expiration Date
+month: Month
+year: Year
+creditCard: Credit or debit card
+upgrade: Upgrade
+unsubscribe: Unsubscribe
+addNewCard: Add credit card
+invoices: Invoices
+subscribedExpl: You are currently subscribed to <strong>{{plan}}</strong>. Your credit card ({{lastFour}}) will be automatically charged <strong>{{amount}}</strong> every month until cancelled (free plan is chosen).
+onGracePeriodExpl: You have canceled your subscription and currently are on grace period until <strong>{{date}}</strong>. After this time you will be reverted back to free plan.
+free: FREE
+chose: Choose
+currentPlan: Current Plan
+month: month
+year: year
+upgradeSuccess: Your account has been upgraded succesufully.
+noFilePreview: No File Preview is Available.
+cantPlayAudio: There was a problem playing this audio file.
+cantPlayVideo: There was a problem playing this video file.
+cantShowText: There was a problem previewing this text file.
+cantPreviewZip: There was a problem previewing this zip file.
+mustBeNumber: Please enter a number.
+cantBeEmpty: Please enter something.
+itemsSelected: Items Selected
+upload: Upload
+cancel: Cancel
+create: Create
+createNewFolder: Create a New Folder
+name: Name
+folderAlreadyExists: Folder with that name already exists.
+newFolderCreated: Folder Created.
+folders: Folders
+newFolder: New Folder
+uploading: Uploading
+rename: Rename
+uploadsInProgress: Uploads In Progress
+uploadsComplete: Uploads Completed
+rejected: Rejected
+sizeBigFirst: Size - bigger first
+sizeSmallFirst: Size - smaller first
+type: Type
+modified: Modified
+dateUploaded: Date Uploaded
+uploadDndExpl: You can drag and drop your files or folders anywhere on the page to upload them.
+uploadDndExplNoFolder: You can drag and drop your files anywhere on the page to upload them.
+new: New
+orderBy: Order By
+folders: Folders
+folder: Folder
+moreOptions: More Options
+rootFolderDesc: Base Folder. All files not uploaded or moved to a specific folder will end up here.
+rootFolder: Root Folder
+sortOptions: Sort Options
+size: Size
+searchResults: Search Results
+activity: Activity
+renamed: Renamed
+copyLink: Copy Link
+favoritesEmpty1: You have not added anything to your favorites yet.
+favoritesEmpty2: Add files to favorites to easily find them later.
+trashEmpty1: There is nothing in your trash currently.
+trashEmpty2: Delete files to move them to trash automatically. Delete files from trash to remove them permanently.
+recentEmpty1: There are not recent files.
+recentEmpty2: Once you upload some files, most recent ones will appear here.
+searchEmpty1: No results.
+searchEmpty2: Couldn't find any folders or files matching your search query.
+dropFilesFoldersHere: Drop files and folders here
+dropFilesHere: Drop files here
+smallScreenFolderEmpty: No files in this folder yet.
+smallScreenFolderEmpty2: Use the new button above to upload some.
+orUseBtnsAbove: Or use one of the orange buttons above.
+toggleView: Toggle grid and list view
+searchFilesFolders: Search for Files and Folders
+maxSimultUploadsWarning: You can only upload {{ number }} files at the same time.
+maxSimultUploads: Maximum simultaneous uploads.
+maxSimultUploadsExpl: How many files user can upload at the same time.
+you: You
+resume: Resume
+
+#Right Panel
+uploadActivity: uploaded
+items: Items
+allFolders: All Folders
+ago: ago
+created: Created
+folder: Folder
+addToFavorites: Add to Favorites
+description: Description
+files: Files
+none: None
+yes: Yes
+no: No
+recentActivity: Recent Activity
+
+#Left Panel
+trash: Trash
+recent: Recent
+favorites: Favorites
+
+#Navbar
+searchFilesAndFolder: Search Files and Folders
+editUsername: Edit Username
+changeAvatar: Change Avatar
+logOut: Log Out
+accountSettings: Account Settings
+confirm: Confirm
+noMatches: No files or folders that match your search found.
+dashboard: Dashboard
+links: Links
+comments: Comments
+
+#Account
+username: Username
+firstName: First Name
+lastName: Last Name
+gender: Gender
+male: Male
+female: Female
+notSaying: Not Saying
+oldPassword: Old Password
+passwordChangeSuccess: Your password was changed successfully.
+avatarAcceptedFormats: Accepted formats: png, jpeg.
+avatarResizeExpl: Your avatar will be resized to 200x200 (px) if it's bigger than that.
+view: View
+
+#Responses
+cardAddSucess: Added new card successufully.
+unsubSuccess: Canceled your subscription successfully.
+subResumeSuccess: Resumed your subscription successfully.
+planSwapSuccess: Changed your plan to :plan successfully.
+cancelSub: Cancel Your Subscription
+cancelSubConfirm: This will cancel your current subscription, you will no longer be charged monthly and you will be reverted to free plan after your current subscription time runs out, are you sure you want to continue?
+genericError: Something went wrong, please try again later.
+favoriteSuccess: Added items to favorites successfully.
+favoriteDetachSuccess: Removed item from favorites successfully.
+favoriteExists: You have already marked this photo as favorite.
+passMatches: Password is correct.
+noSpaceLeft: You are out of space. Please delete some files.
+passDoesntMatch: Incorrect password. Please try again.
+descriptionUpdated: Description updated successfully.
+noPermissions: You don't have permissions to do that.
+profileUpdateSuccess: You profile was updated successfully.
+avatarRemoveSuccess: Removed avatar successfully.
+copiedItems: Copied {{ number }} items.
+folderDownloadProbelm: There was a problem with downloading this folder, please try again later.
+nothingToPreview: This folder is empty.
+folderRenameSuccess: Renamed folder successfully.
+photoMovedToTrash: Photo has been moved to trash.
+movedToTrash: Moved {{ number }} items to trash.
+permaDeletedItems: Permanently deleted {{ number }} items.
+permaDeleteFolderWarning: Are you sure you want to delete this folder?
+deleteItems: Delete Items
+sureWantToDeleteItems: Are you sure you want to delete these items?
+fileRenameSuccess: Renamed one file.
+movedItems: Moved {{ number }} items to {{ folder }}
+noPermissions: You don't have the required permissions to access this page.
+createdUserSuccessfully: Created user successfully.
+updatedUserSuccessfully: Updated user successfully.
+settingsUpdated: Updated settings successfully.
+folderDownloadProblem: There was a problem with downloading this folder. Please try again later.
+logOutSuccess: Logged out successfully.
+savedPhotoSuccessfully: Saved photo successfully.
+restoreSuccess: Restored {{ number }} items.
+photoAttachSuccess: Attached :number photo(s) to your account that you have uploaded while logged out.
+deletedUsers: Deleted :number users.
+registrationDisabled: Registration is disabled.
+folderNameExists: You already have a folder with that name.
+fileTooBig: This file is too big. Maximum file size is {{ number }} megabytes.
+invalidExtension: You are not allowed to upload files of this type.
+sentEmailsSuccess: Sent emails successfully.
+copiedLink: Link copied to clipboard.
+copyNotSupported: Not supported by your browser.
+
+#Trash
+deleteForever: Delete Forever
+confirmPermaDelete: Are you sure you want to permanently delete these item(s)?
+delete: Delete
+permaDeleteWarning: Warning: this action is not undoable.
+restore: Restore
+trashed: Trashed
+permaDeleted: Permanently deleted
+
+#Context menu
+preview: Preview
+openInEditor: Open in editor
+share: Share
+getLink: Get link
+moveTo: Move to
+favorite: Favorite
+manageVersions: Manage versions...
+makeACopy: Make a copy
+download: Download
+remove: Remove
+
+#Share Panel
+passwordAddSuccess: Added password successfully.
+passwordRemoveSuccess: Removed password successfully.
+copyLink: Copy Link
+sendLinkViaEmail: Send this link via email
++email: +Email
+messageOptional: Message (optional)
+notPassProtected: Anyone with the link can see this
+passProtected: is password protected
+this: This
+addPassword: Add password.
+remove: Remove.
+add: Add
+done: Done
+photoPassMessage: This item is password protected. Enter it in the field below to view the item.
+albumPassMessage: This folder is password protected. Enter it in the field below to view the folder.
+facebookShare: Share on Facebook
+twitterShare: Tweet
+pinterestShare: Pin it
+
+# Password reset
+passwordRecovery: Password Recovery
+sendEmail: Send Email
+passResetExpl: Please enter the email address associated with your account.
+resetPassword: Reset Password
+resetErrors: There were some problems with your input.
+emailAddress: E-Mail Address
+confirmPassword: Confirm Password
+newPassword: New Password
+forgot: Forgot?
+
+# Emails
+linkShareSubject: :email shared ":file" with you.
+justShared: just shared a file with you!
+clickToView: Click here to view
+
+# Admin
+users: Users
+user: User
+enablePushState: Enable HTML5 Pushstate mode
+settings: Settings
+mail: Mail
+mailDriver: Mail Driver
+mailDriverExpl: What should be used to send emails?
+host: Host
+port: Port
+mailUsername: Username
+mailPassword: Password
+fromAddress: Global from address
+fromName: Global from name
+filesystem: Filesystem
+defaultFilesystem: Default Filesystem
+filesystemExpl: Where to store user uploaded files?
+deleted: Deleted
+of: of
+createNewUser: Create a New User
+updateUser: Update User
+search: Search
+editUser: Edit User
+edit: Edit
+analytics: Analytics
+avatar: Avatar
+rowsPerPage: Rows per page:
+googleAnalyticsCode: Google analytics tracking code
+googleAnalyticsCodeExpl: Looks like this UA-******-2 (numbers instead of stars)
+mandrillExpl: Your mandrill API Key. Required to make mail (for password reset and other functions) work. You can use an smtp server as well but mandrill is more reliable and will cause less problems.
+usersSelected: users selected
+inTrash: In Trash
+filesSelected: files selected
+uploadedAt: Uploaded At
+uploaded: Uploaded
+dateLocale: Date Locale
+dateLocaleExpl: Locale you want dates formated in. ISO 639-1 code.
+ads: Ads
+siteName: Site Name
+metaTitle: Meta Title
+metaDescription: Meta Description
+metaKeywords: Meta Keywords
+generalSettings: General Site Settings
+filesValidation: Files Validation
+enablePaymentsSystem: Enable payments system
+enablePaymentsSystemExpl: If this is set to 'no' all payment related things (upgrade button, relevant urls etc) will be disabled and/or hidden.
+freePlanSpace: Disk space for users on free plan (or all users if payments are disabled)
+maxUserSpaceExpl: How much space each users files are allowed to take on your server. In bytes.
+converter: Converter
+used: used
+maxFileSize: Maximum File Size
+maxFileSizeExpl: The maximum file size that users are able to upload. In megabytes.
+allowedFormats: Allowed Formats
+whitelist: Whitelist
+blacklist: Blacklist
+whitelistExpl: Users will only be able to upload files with these formats. Example: mp4, jpg, mp3, pdf. Leave empty to allow all formats to be uploaded.
+blacklistExpl: Prevent these file formats to be uploaded even if they are in whitelist or all formats are allowed.
+stripePubKey: Stripe Publishible Key
+stripeSecretKey: Stripe Secret Key
+stripePubKeyExpl: Required in order for payments system to work.
+invoiceProduct: Product on invoice
+invoiceVendor: Vendor on invoice
+invoiceProductExpl: Product name that will appear on invoices generated for subscriptions. Optional.
+invoiceVendorExpl: Vendor name that will appear on invoices generated for subscriptions. Optional.
+payments: Payments
+disqusShortname: Disqus Shortname
+disqusShortnameExpl: Your disqus shortname, required in order for comments to work.
+id: ID
+secret: Secret
+3rdPartyServiceKeys: Third Party Service Keys
+showKeys: Show Keys
+socialLoginKeysExpl: Enter your credentials for social login services below. You can find information on how to get them in the documentation.
+enableRegistration: Enable Registration
+enableRegistrationExpl: If this is set to 'No', registration page and all links/references will be disabled and users will not be able to register on their own.
+adminArea: Admin Area
+homepage: Homepage
+homeTagline: Home Tagline
+homeTaglineExpl: This will appear on your homepage (if it's set to landing page), right below the navbar.
+homeByline: Home Byline
+homeBylineExpl: This will appear on your homepage (if it's set to landing page), right below the tagline.
+homeButtonText: Home Button Text
+homeButtonTextExpl: Text of the button that appears under home byline.
+landingPage: Landing Page
+loginPage: Login Page
+customPage: Custom Page
+homepageExpl: What page do you want to display as your homepage.
+customHomepagePath: Custom Homepage Path
+customHomepagePathExpl: Path to your custom homepage file. Relative to root folder or url on internet.
+metaInformation: Meta Information
+validation: Validation
+notAttachedToUser: Only show files not attached to user.
+dashboardNumOfFiles: Number of files to display in user dashboard.
+dashboardNumOfFilesExpl: If user has uploaded more files then number set here, rest of the files will be loaded via infinite scroll.
+uploadsAndDashboard: Uploading and Dasboard
+siteUrl: Site Url
+spaceAvailable: Space Available (In Megabytes)
+version: Version
+
+# Homepage
+random: Random
+loginNow: Login Now
+toSaveManageAndEdit: to save, manage and edit your uploaded files.
+goTo: Go to
+uploadComplete: Upload Complete
+noFilesUploaded: No files have been uploaded
+filesValidationFailed: Your files seem to have failed our validation. Please try again.
+loginToUpload: Please register or login to upload your files.
+
+# Titles
+loginTitle: Login
+registerTitle: Register
+resetPasswordTitle: Reset Password
+foldersRoot: Folders
+dashboardTitle: Dashboard - BeDrive
+homeTitle: Home of your files.

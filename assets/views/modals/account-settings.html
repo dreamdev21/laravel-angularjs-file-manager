@@ -1,0 +1,87 @@
+<script type="text/ng-template" id="assets/views/modals/account-settings.html">
+    <md-dialog class="md-modal md-modal-wide account-settings-modal">
+
+        <div class="md-modal-header">
+            <div class="md-modal-avatar">
+                <img class="img-responsive" ng-src="{{ users.getAvatar() }}"/>
+            </div>
+            <div class="name">{{ users.current.first_name }} {{ users.current.last_name }}</div>
+            <div class="email">{{:: users.current.email }}</div>
+        </div>
+
+        <div class="md-modal-nav">
+            <div ng-click="activeTab = 'settings'" ng-class="{ active: activeTab === 'settings' }" class="md-modal-nav-item"><i class="icon icon-cog"></i></div>
+            <div ng-click="activeTab = 'avatar'" ng-class="{ active: activeTab === 'avatar' }" class="md-modal-nav-item"><i class="icon icon-emo-sunglasses"></i></div>
+            <div ng-click="activeTab = 'password'" ng-class="{ active: activeTab === 'password' }" class="md-modal-nav-item"><i class="icon icon-lock-filled"></i></div>
+        </div>
+
+        <div class="md-modal-tab" ng-class="{ open: activeTab === 'settings' }">
+            <md-input-container>
+                <label>{{ 'username' | translate }}</label>
+                <input class="username" type="text" ng-model="users.accountSettings.username">
+            </md-input-container>
+
+            <md-input-container>
+                <label>{{ 'firstName' | translate }}</label>
+                <input type="text" ng-model="users.accountSettings.first_name">
+            </md-input-container>
+
+            <md-input-container>
+                <label>{{ 'lastName' | translate }}</label>
+                <input type="text" ng-model="users.accountSettings.last_name">
+            </md-input-container>
+
+            <md-select placeholder="{{:: 'gender' | translate }}" ng-model="users.accountSettings.gender">
+                <md-option value="male" translate>{{:: 'male' | translate }}</md-option>
+                <md-option value="female" translate>{{:: 'female' | translate }}</md-option>
+                <md-option value="" translate>{{:: 'notSaying' | translate }}</md-option>
+            </md-select>
+
+            <div class="buttons">
+                <md-button ng-click="users.closeModal()">{{:: 'cancel' | translate }}</md-button>
+                <md-button ng-click="users.updateAccountSettings()" class="md-raised md-primary">{{:: 'confirm' | translate }}</md-button>
+            </div>
+        </div>
+
+        <div class="md-modal-tab" ng-class="{ open: activeTab === 'password' }">
+            <form ng-submit="users.changePassword()">
+                <md-input-container ng-if="users.current.password">
+                    <label>{{ 'oldPassword' | translate }}</label>
+                    <input type="password" ng-model="users.changePasswordModel.oldPassword">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{ 'newPassword' | translate }}</label>
+                    <input type="password" ng-model="users.changePasswordModel.newPassword">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{ 'confirmPassword' | translate }}</label>
+                    <input type="password" ng-model="users.changePasswordModel.newPassword_confirmation">
+                </md-input-container>
+
+                <div class="buttons">
+                    <md-button ng-click="users.closeModal()">{{:: 'cancel' | translate }}</md-button>
+                    <md-button type="submit" class="md-raised md-primary">{{:: 'change' | translate }}</md-button>
+                </div>
+            </form>
+        </div>
+
+        <div class="md-modal-tab avatar-tab" ng-class="{ open: activeTab === 'avatar' }">
+
+            <img class="img-responsive" ng-src="{{ users.getAvatar() }}"/>
+
+            <p>{{:: 'avatarAcceptedFormats' | translate }}</p>
+            <p>{{:: 'avatarResizeExpl' | translate }}</p>
+
+            <div class="buttons">
+                <md-button ng-click="users.closeModal()">{{:: 'cancel' | translate }}</md-button>
+                <md-button ng-click="users.removeAvatar()">{{:: 'remove' | translate }}</md-button>
+                <md-button ng-file-select ng-file-change="upload($files)" accept="image/*" ngf-accept="'.png,.jpg'" class="md-raised md-primary">
+                    <i class="icon icon-upload-cloud"></i>
+                    {{:: 'upload' | translate }}
+                </md-button>
+            </div>
+        </div>
+    </md-dialog>
+</script>

@@ -1,0 +1,139 @@
+@import (reference) 'main.less';
+
+@right-col-color: #94A7B1;
+@right-col-width: 365px;
+@right-col-bg: @dashboard-background;
+
+#right-col {
+    width: @right-col-width;
+    flex: 0 0 auto;
+    background-color: @right-col-bg;
+    height: 100%;
+    transition: translate, width 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    @media (max-width: 1342px) {
+        position: absolute;
+        width: 90%;
+        max-width: 365px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        .md-whiteframe-z4();
+    }
+
+    .right-panel-inner {
+        height: 100%;
+    }
+
+    .ad-container {
+        padding: 15px 10px;
+        overflow: hidden;
+    }
+
+    &.closed {
+        display: none;
+        transform: translate(@right-col-width, 0);
+        width: 0;
+    }
+
+    &.closed-add,
+    &.closed-remove {
+        display: block;
+    }
+
+    .right-panel-header {
+        position: relative;
+        padding: 18px 0 20px 5px;
+        color: @right-col-color;
+        font-size: 16px;
+        margin: 10px 25px 0;
+        flex-shrink: 0;
+        .user-select(none);
+        text-transform: uppercase;
+        font-weight: 400;
+
+        > span {
+            vertical-align: sub;
+        }
+
+        .close-icon-wrapper {
+            cursor: pointer;
+            float: right;
+            color: @right-col-color;
+            font-size: 25px;
+            line-height: 1;
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}
+
+#activity-tab {
+    margin: 0 0 0 20px;
+    padding-right: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: ~"calc(100% - 70px)";
+
+    .activity-list-item {
+        border-bottom: 1px solid @dashboard-border-color;
+        padding: 15px;
+        margin-bottom: 15px;
+
+        .icon {
+            color: @primary-palette;
+            margin-right: 4px;
+        }
+
+        .items-list {
+            margin-top: 20px;
+            font-size: 15px;
+
+            > .item {
+                margin: 7px 0;
+                width: 234px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                .icon {
+                    margin-right: 8px;
+                }
+            }
+        }
+
+        .media-body {
+            color: #A8B7BE;
+        }
+
+        .media-heading {
+            margin: 7px 0 -2px;
+            //font-weight: bold;
+            color: #748691;
+            line-height: 1;
+        }
+
+        .media-object {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
+}
+
+.activity-list-item.ng-enter,
+.activity-list-item.ng-leave {
+    transition: .2s linear all;
+}
+
+.activity-list-item.ng-enter,
+.activity-list-item.ng-leave.ng-leave-active {
+    opacity:0;
+}
+.activity-list-item.ng-leave,
+.activity-list-item.ng-enter.ng-enter-active {
+    opacity:1;
+}

@@ -1,0 +1,12 @@
+<section class="file-tree">
+    <div class="back" ng-click="oneFolderUp()" ng-if="folder._parent"><i class="icon icon-left-open-mini"></i></div>
+    <h2>{{ name }} <span class="item-count">{{ folderLength }} {{:: 'items' | translate }}</span></h2>
+    <ul>
+        <li ng-repeat="(name, content) in folder" ng-if="name.charAt(0) !== '_'" ng-click="changeFolder(name, content)" class="folder"> <i class="icon icon-folder"></i> {{ name }}</li>
+        <li ng-repeat="(name, content) in folder" ng-if="name === '_files' && name !== '_parent'">
+            <ul>
+                <li ng-repeat="name in content" ng-if="name.charAt(0) !== '_'" class="file"><i class="icon icon-doc-inv"></i> {{ name }}</li>
+            </ul>
+        </li>
+    </ul>
+</section>

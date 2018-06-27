@@ -1,0 +1,91 @@
+<section id="upgrade" ng-class="{loading: loading}">
+    <div class="upgrade-inner">
+        <!--<svg width="100" height="100">-->
+        <!--<circle r="30" cx="50" cy="50"></circle>-->
+        <!--</svg>-->
+
+        <div class="plans">
+            <div class="plan free-plan" ng-class="{selected: (selectedPlan && selectedPlan == plan.id) || (!selectedPlan && currentUserPlan == plan.id)}">
+                <div class="size">{{ freePlanSpace }}</div>
+                <div class="price">{{:: 'free' | translate }}</div>
+                <div class="choose">
+                    <md-button ng-if="currentUserPlan && !onGracePeriod" ng-click="unsubscribe()" class="md-primary md-raised">{{:: 'choose' | translate }}</md-button>
+                    <span ng-if="!currentUserPlan">{{:: 'currentPlan' | translate }}</span>
+                </div>
+            </div>
+
+            <div class="plan" ng-repeat="plan in plans track by $index" data-plan="{{selectedPlan}}" data-other="{{plan.id}}" ng-class="{selected: (selectedPlan && selectedPlan == plan.id) || (!selectedPlan && currentUserPlan == plan.id)}">
+                <div class="size">{{plan.name}}</div>
+                <div class="price">${{plan.amount}}/{{:: plan.interval | translate }}</div>
+                <div class="choose">
+                    <md-button ng-if="currentUserPlan != plan.id && !onGracePeriod" ng-click="selectPlan(plan)" class="md-primary md-raised">{{:: 'choose' | translate }}</md-button>
+                    <md-button ng-if="onGracePeriod" ng-click="resumePlan(plan)" class="md-primary md-raised">{{:: 'resume' | translate }}</md-button>
+                    <span ng-if="currentUserPlan === plan.id && !onGracePeriod">{{:: 'currentPlan' | translate }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="errors"></div>
+
+            <div ng-if="onGracePeriod">
+                <p ng-bind-html="gracePeriodMsg"></p>
+            </div>
+
+            <div ng-if="!onGracePeriod && currentUserPlan">
+                <p ng-bind-html="subscribedMsg"></p>
+            </div>
+
+            <form name="cardInfo" ng-if="!currentUserPlan || addingNewCard">
+                <div class="inline-inputs">
+                    <div class="input-group">
+                        <label for="card-number">{{:: 'creditCard' | translate }}</label>
+                        <input id="card-number" class="form-control" type="text" ng-model="cardDetails.number" placeholder="{{:: 'cardNumber' | translate }}" required>
+                    </div>
+
+                    <img src="assets/images/credit-cards.png" alt="credit-cards">
+                </div>
+
+                <div class="inline-inputs">
+                    <div class="shared-label">
+                        <div class="label">{{:: 'expirationDate' | translate }}</div>
+                        <div class="input-group month">
+                            <select id="card-exp-month" class="form-control" ng-model="cardDetails.exp_month" required>
+                                <option value="" disabled selected>{{:: 'month' | translate }}</option>
+                                <option ng-value="month" ng-repeat="month in months">{{ month }}</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group year">
+                            <select id="card-exp-year" class="form-control" ng-model="cardDetails.exp_year" required>
+                                <option value="" disabled selected>{{:: 'year' | translate }}</option>
+                                <option ng-value="year" ng-repeat="year in years">{{ year }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group cvc">
+                        <label for="card-cvc">{{:: 'securityCode' | translate }}</label>
+                        <input id="card-cvc" class="form-control" type="number" ng-model="cardDetails.cvc" placeholder="CVC" required minlength="1" maxlength="4">
+                    </div>
+                </div>
+
+               <div ng-if="!addingNewCard">
+                   <md-button type="button" ng-click="closeModal()">{{:: 'cancel' | translate }}</md-button>
+                   <md-button class="md-primary md-raised" ng-disabled="submitDisabled()">{{:: 'upgrade' | translate }}</md-button>
+               </div>
+            </form>
+
+            <div ng-if="currentUserPlan" class="close-btn">
+                <md-button type="button" ng-if="!addingNewCard"ng-click="closeModal()">{{:: 'close' | translate }}</md-button>
+                <md-button type="button" ng-if="!addingNewCard" ng-click="showNewCardForm()" class="md-primary">{{:: 'addNewCard' | translate }}</md-button>
+
+                <md-button type="button" ng-if="addingNewCard" ng-click="hideNewCardForm()">{{:: 'cancel' | translate }}</md-button>
+                <md-button type="button" ng-if="addingNewCard" ng-click="addNewCard()" ng-disabled="submitDisabled()" class="md-primary md-raised">{{:: 'add' | translate }}</md-button>
+            </div>
+        </div>
+
+        <div class="loading-overlay"></div>
+        <md-progress-circular class="loading-spinner" md-mode="indeterminate"></md-progress-circular>
+    </div>
+</section>

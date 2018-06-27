@@ -1,0 +1,95 @@
+<div ng-class="{'album-empty': dashboardState.loaded && (! items || ! items.length)}">
+
+    <section ng-if="selectedView === 'grid' && items.length" class="user-items grid-view">
+        <div ng-repeat="item in items track by item.share_id" ed-context-menu-item ng-click="selectItem(item, $event)" ng-dblclick="selectedItems.preview()" long-press="contextMenu.open()" ng-class="{ selected: itemIsSelected(item) }" class="user-item" ed-file-draggable ed-folder-droppable data-id="{{ item.id }}" data-type="{{item.type}}">
+            <div class="user-item-inner">
+                <div ng-if="fileTypes.isImage(item.mime)" class="img-wrapper" afkl-lazy-image="{{ getImageUrl(item) }}"></div>
+                <div ng-if="!fileTypes.isImage(item.mime) && item.type !== 'folder'" class="big-icon"><i class="icon icon-{{fileTypes.getMimeIcon(item.mime)}}"></i></div>
+                <div ng-if="item.type == 'folder'" class="folder-icon"><i class="icon icon-folder"></i></div>
+                <div class="user-item-caption">
+                    <div class="name">{{ item.name }}</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section ng-if="selectedView === 'list' && items.length" class="user-items list-view">
+        <div class="material-table" ng-controller="PhotosListController">
+            <div class="table">
+                <div class="table-body">
+                    <div class="table-row user-item" ng-repeat="item in items track by item.share_id" ed-context-menu-item ng-click="selectItem(item, $event)" ng-dblclick="selectedItems.preview()" long-press="contextMenu.open()" ng-class="{ selected: itemIsSelected(item) }" ed-file-draggable ed-folder-droppable data-id="{{ item.id }}" data-type="{{item.type}}">
+                        <div class="table-col small-col align-left">
+                            <md-checkbox aria-label="file-selected" ng-checked="itemIsSelected(item)"></md-checkbox>
+                        </div>
+                        <div class="table-col show-phone name">
+                            <div>
+                                <i ng-if="item.type == 'file'" class="icon icon-{{fileTypes.getMimeIcon(item.mime)}}"></i>
+                                <i ng-if="item.type == 'folder'" class="icon icon-folder"></i>
+                                <span>{{ item.name }}</span>
+                            </div>
+                        </div>
+                        <div class="table-col">{{ item.file_size ? utils.formatFileSize(item.file_size) : '-' }}</div>
+                        <div class="table-col">{{ utils.formatDate(item.updated_at) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.favorites') && !items.length && dashboardState.loaded">
+        <div class="icon">
+            <i class="icon icon-star-filled"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'favoritesEmpty1' | translate }}</h4>
+            <p>{{:: 'favoritesEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.trash') && !items.length && dashboardState.loaded">
+        <div class="icon">
+            <i class="icon icon-trash"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'trashEmpty1' | translate }}</h4>
+            <p>{{:: 'trashEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.recent') && !items.length && dashboardState.recentLoaded">
+        <div class="icon">
+            <i class="icon icon-clock-1"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'recentEmpty1' | translate }}</h4>
+            <p>{{:: 'recentEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+    <section class="section-empty" ng-if="utils.stateIs('dashboard.search') && !items.length && dashboardState.loaded">
+        <div class="icon">
+            <i class="icon icon-search"></i>
+        </div>
+        <div class="text">
+            <h4>{{:: 'searchEmpty1' | translate }}</h4>
+            <p>{{:: 'searchEmpty2' | translate }}</p>
+        </div>
+    </section>
+
+   <div ng-if="utils.stateIs(['dashboard.folders', 'dashboard.foldersRoot']) && !items.length && dashboardState.loaded">
+       <section class="dropzone-outter"></section>
+
+       <div class="dropzone-inner">
+           <i class="icon icon-upload-cloud"></i>
+           <h3 ng-if=":: utils.folderUploadSupported">{{:: 'dropFilesFoldersHere' | translate }}</h3>
+           <h3 ng-if=":: !utils.folderUploadSupported">{{:: 'dropFilesHere' | translate }}</h3>
+           <div class="text-below">{{:: 'orUseBtnsAbove' | translate }}</div>
+       </div>
+       
+       <div class="phone-no-photos" ng-if=":: isSmallScreen">
+           <h1><i class="icon icon-picture"></i> {{:: 'smallScreenFolderEmpty' | translate }}</h1>
+           <p>{{:: 'smallScreenFolderEmpty2' | translate }}</p>
+       </div>
+   </div>
+</div>
+

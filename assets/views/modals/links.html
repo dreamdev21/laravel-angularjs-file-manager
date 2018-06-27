@@ -1,0 +1,9 @@
+<script type="text/ng-template" id="assets/views/modals/links.html">
+    <md-dialog class="md-modal links-modal">
+        <div class="md-modal-header">
+            <h1>{{:: 'links' | translate }}</h1>
+            <div ng-click="close()" class="md-close-modal"><i class="icon icon-cancel"></i></div>
+        </div>
+        <ed-shareable-links ed-generate-nav="shareable.folder_id"></ed-shareable-links>
+    </md-dialog>
+</script>

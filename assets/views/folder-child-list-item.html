@@ -1,0 +1,13 @@
+<ul class="list-unstyled">
+    <li class="folder"
+        ng-repeat="folder in allFolders track by folder.id"
+        ng-click="folders.open(folder); $event.stopPropagation();"
+        data-name="{{:: folder}}"
+        ed-context-menu-item
+    >
+        <div class="folder-name" ng-class="{ open: folders.selected.name === folder }">
+            <i class="icon icon-folder"></i> {{:: folder }} <i class="icon toggle-icon icon-right-dir"></i>
+        </div>
+
+    </li>
+</ul>

@@ -1,0 +1,173 @@
+#login-page {
+    background-color: @gray-lighter;
+    height: 100%;
+
+    .form-group {
+        position: relative;
+    }
+
+    .forgot-password {
+        position: absolute;
+        right: 15px;
+        top: 12px;
+        cursor: pointer;
+        color: #94A4AE;
+        font-weight: 400;
+    }
+
+    md-checkbox {
+        margin: 4px 2px;
+    }
+
+    .alert {
+        display: none;
+        border: none;
+        color: #fff;
+        background-color: @brand-danger;
+        text-align: center;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .form-error {
+        display: block;
+        background-color: @brand-danger;
+        color: #fff;
+        padding: 12px 20px;
+        position: absolute;
+
+    }
+
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+        width: 350px;
+        font-family: 'Open Sans', sans-serif;
+
+        .social-icons {
+            width: 113px;
+            margin: 0 auto;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            box-shadow: none;
+        }
+
+        form {
+            width: 100%;
+            position: relative;
+        }
+
+        .loader {
+            position: absolute;
+            top: 39.5%;
+            left: 40%;
+        }
+
+        p {
+            color: #797979;
+            text-align: center;
+            font-size: 13px;
+            margin: 35px 0 35px;
+        }
+
+        .logo {
+            width: auto;
+            height: 74px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .register-btns-container {
+            .clearfix();
+
+            > .social-icons {
+                float: left;
+            }
+
+            > .md-button {
+                float: right;
+            }
+        }
+
+        .form-control {
+            border-radius: 0;
+            border: none;
+            outline: none;
+            height: 45px;
+            .placeholder(#94A4AE);
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        &.loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes shake {
+    0%, 100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%, 40%, 60%, 80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+.shake {
+    animation-name: shake;
+}
+
+@keyframes flipInX {
+    0% {
+        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+        transition-timing-function: ease-in;
+        opacity: 0;
+    }
+
+    40% {
+        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+        transition-timing-function: ease-in;
+    }
+
+    60% {
+        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+        opacity: 1;
+    }
+
+    80% {
+        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    }
+
+    100% {
+        transform: perspective(400px);
+    }
+}
+
+.flipInX {
+    backface-visibility: visible !important;
+    animation-name: flipInX;
+}

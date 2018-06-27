@@ -1,0 +1,68 @@
+<div id="dashboard">
+    <div class="flex-container" id="admin">
+        <section id="left-col-upper">
+            <section id="left-col">
+                <i class="icon icon-cancel left-col-closer" left-column-closer ng-if=":: isSmallScreen"></i>
+                <div class="current-user" data-toggle="dropdown">
+                    <div class="avatar">
+                        <img class="img-responsive" ng-src="{{ users.getAvatar() }}"/>
+                    </div>
+                    <div class="user-email dropdown">
+                        {{ users.getUsernameForCurrentUser() }}
+                        <span class="caret"></span>
+                        <ul class="dropdown-menu" role="menu">
+                            <li ui-sref="dashboard.folders"><a href=""><i class="icon icon-gauge"></i> {{:: 'dashboard' | translate }}</a></li>
+                            <li ng-click="users.showAccountSettingsModal($event, 'username')"><a href=""><i class="icon icon-pencil"></i> {{:: 'editUsername' | translate }}</a></li>
+                            <li ng-click="users.showAccountSettingsModal($event, 'avatar')"><a href=""><i class="icon icon-emo-sunglasses"></i> {{:: 'changeAvatar' | translate }}</a></li>
+                            <li ng-click="users.showAccountSettingsModal($event)"><a href=""><i class="icon icon-cog"></i> {{:: 'accountSettings' | translate }}</a></li>
+                            <li class="separator"></li>
+                            <li ng-if="users.current.stripe_id" ng-click="$event.stopPropagation()"><a target="_blank" href="{{ baseUrl+'payments/invoices' }}"><i class="icon icon-doc-text"></i> {{:: 'invoices' | translate }}</a></li>
+                            <li ng-click="users.logout()"><a href=""><i class="icon icon-login"></i> {{:: 'logOut' | translate }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="categories-list">
+                    <div class="category" ui-sref=".analytics" ui-sref-active="open"><i class="icon icon-gauge"></i> <span class="text">{{:: 'analytics' | translate }}</span></div>
+                    <div class="category" ui-sref=".users" ui-sref-active="open"><i class="icon icon-users"></i> <span class="text">{{:: 'users' | translate }}</span></div>
+                    <div class="category" ui-sref=".files" ui-sref-active="open"><i class="icon icon-docs"></i> <span class="text">{{:: 'files' | translate }}</span></div>
+                    <div class="category" ui-sref=".folders" ui-sref-active="open"><i class="icon icon-folder"></i> <span class="text">{{:: 'folders' | translate }}</span></div>
+                    <div class="category" ui-sref=".settings" ui-sref-active="open"><i class="icon icon-cog"></i> <span class="text">{{:: 'settings' | translate }}</span></div>
+                    <div class="category" ui-sref=".ads" ui-sref-active="open"><i class="icon icon-wallet"></i> <span class="text">{{:: 'ads' | translate }}</span></div>
+                </div>
+
+                <div class="version">{{:: 'version' | translate }} {{ utils.version }}</div>
+            </section>
+
+            <section id="middle-col">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle left-col-toggler" data-toggle="collapse" data-target="#navbar-ex1-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            <a class="navbar-brand" ui-sref="home">
+                                <img class="logo" ng-src="{{ baseUrl+'assets/images/logo_dark.png' }}" alt="logo"/>
+                            </a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbar-text" ng-click="users.logout()"><i class="icon icon-login"></i> <div class="text">{{:: 'logOut' | translate }}</div></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <section class="flex-fluid-container">
+                    <div class="flex-fluid" ui-view></div>
+                </section>
+            </section>
+        </section>
+    </div>
+</div>
+
+<div ng-include="'assets/views/modals.html'"></div>
+
+<demo-alert ng-if="utils.isDemo" storageKey="admin" message="Note that admin area is accessible to all users on demo site. It would normally only be accessible to admin as expected."></demo-alert>

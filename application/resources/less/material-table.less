@@ -1,0 +1,378 @@
+.material-table {
+    background-color: @dashboard-background-lighter;
+    border-radius: 2px;
+    border: 1px solid @table-border-color;
+    max-height: 100%;
+    text-rendering: optimizeLegibility;
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 auto;
+    
+    .ajax-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+
+    &.loading {
+        border: none;
+
+        > .footer, .table, .header {
+            display: none;
+        }
+    }
+
+    .search {
+        height: 40px;
+        position: relative;
+        border-radius: 3px;
+        box-shadow: 0 1px 3px rgba(0,0,0,.25);
+
+        > input {
+            border: none;
+            height: 100%;
+            padding: 0 10px 0 35px;
+            border-radius: 3px;
+            .placeholder(#DBDBDB);
+            font-size: 18px;
+            line-height: normal;
+
+            &:focus, &:active {
+                outline: none;
+            }
+        }
+
+        > i {
+            position: absolute;
+            top: 11px;
+            left: 5px;
+            color: #707070;
+            font-size: 15px;
+        }
+    }
+
+    .table {
+        margin-bottom: 0;
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        justify-content: space-between;
+        max-height: 100%;
+        overflow: auto;
+
+        > .table-body {
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            .name {
+                flex: 1 1 50%;
+
+                span {
+                    display: inline-block;
+                    vertical-align: text-bottom;
+                }
+
+                i {
+                    font-size: 20px;
+                    height: 28px;
+                    margin-right: 5px;
+                }
+            }
+
+            > .table-row {
+                color: rgba(0,0,0,0.87);
+                font-weight: 500;
+                font-size: 14px;
+                cursor: pointer;
+
+                &.selected, &:hover {
+                    background-color: darken(#EEEEEE, 1%);
+                }
+
+                &:focus {
+                    outline: none;
+                }
+
+                > th {
+                    padding-left: 25px;
+                }
+            }
+        }
+
+        .table-head {
+            color: rgba(0,0,0,0.54);
+            font-weight: 600;
+            font-size: 13px;
+            flex: 0 0 auto;
+            overflow-y: scroll;
+        }
+
+        .table-row {
+            display: flex;
+            flex-flow: row nowrap;
+            border-bottom: 1px solid #dddddd;
+            padding: 0 25px;
+        }
+
+        .table-col {
+            display: flex;
+            flex-flow: column;
+            flex: 1 1 0px;
+            height: 43px;
+            justify-content: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+
+            &.folder-icon {
+                color: @right-col-color;
+                font-size: 24px;
+
+            }
+
+            &.name-col {
+                flex: 0 0 25%;
+            }
+
+            &.user-col {
+                flex: 0 0 20%;
+            }
+
+            &.size-col {
+                flex: 0 1 12%;
+            }
+
+            &.id-col {
+                flex: 0 1 18%;
+            }
+
+            &.pass-col {
+                flex: 0 1 12%;
+            }
+
+            &.date-col {
+                flex: 0 1 20%;
+            }
+
+            @media (max-width: @screen-sm) {
+                &.small-col {
+                    display: block !important;
+                    flex: 0 0 30px !important;
+                    padding-top: 17px !important;
+                }
+
+                &.name-col {
+                    display: block !important;
+                    flex: 0 0 100% !important;
+                    white-space: nowrap !important;
+                    overflow: hidden !important;
+                    text-overflow: ellipsis !important;
+
+                    .icon {
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            &.image {
+                flex: 0 0 60px;
+                margin: 0 35px 0 25px;
+
+                > img {
+                    width: 38px;
+                    height: 38px;
+                    object-fit: cover;
+                }
+            }
+
+            &.small-col {
+                flex: 0 0 50px;
+
+                > i {
+                    color: #727272;
+                    font-size: 19px;
+                    line-height: 1;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: @primary-palette;
+                    }
+                }
+            }
+
+            &.align-left {
+                align-items: flex-start;
+            }
+
+            &.align-right {
+                align-items: flex-end;
+            }
+        }
+    }
+
+    .header, .selected-header {
+        padding: 20px;
+        height: 68px;
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+
+        > .caption {
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            justify-content: flex-start;
+            width: 30%;
+
+            > .btn:first-of-type {
+                margin-right: 10px;
+            }
+        }
+
+        > .controls {
+            color: #6A6E74;
+            font-size: 20px;
+            line-height: 1;
+            display: flex;
+            justify-content: flex-end;
+            width: 70%;
+
+            > i {
+                cursor: pointer;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    color: @primary-palette;
+                }
+            }
+        }
+    }
+
+    .selected-header {
+        background-color: rgba(255,87,34, 0.3);
+        color: #fff;
+
+        .caption {
+            color: @primary-palette;
+            font-weight: 500;
+            font-size: 16px;
+        }
+    }
+
+    md-checkbox {
+        margin: 0;
+    }
+
+    .footer {
+        margin-top: 25px;
+        margin-left: auto;
+        padding-bottom: 15px;
+        flex: 0 0 auto;
+        width: 100%;
+
+        dir-pagination-controls, .per-page, .meta {
+            display: inline-block;
+            color: #737373;
+            font-weight: 500;
+        }
+
+        md-select {
+            margin: 0 30px 0 5px;
+            display: inline-block;
+            padding: 0;
+            vertical-align: bottom;
+
+            > .md-select-label {
+                padding-top: 0;
+                padding-bottom: 0;
+                border: none;
+                min-width: 16px;
+            }
+
+            .md-select-icon {
+                width: 15px;
+                margin: 0;
+
+                &:after {
+                    top: 0;
+                }
+            }
+        }
+
+        .filters {
+            float: left;
+            margin-left: 25px;
+
+            .md-checkbox {
+                top: -4px;
+            }
+
+            .md-label {
+                color: #737373;
+                font-weight: 500;
+                top: 1px;
+            }
+
+            @media (max-width: @screen-sm) {
+                display: none;
+            }
+        }
+
+        .controls {
+            float: right;
+
+            @media (max-width: @screen-sm) {
+                float: none;
+                padding-left: 10px;
+            }
+        }
+
+        .meta {
+            margin-right: 30px;
+        }
+
+        .pagination {
+            list-style: none;
+            margin-right: 25px;
+            padding: 0;
+
+            > li {
+                display: inline-block;
+
+                &:first-of-type > a {
+                    border-right: none;
+                }
+
+                &.active a {
+                    color: #ff5722;
+                }
+
+                > a {
+                    color: inherit;
+                    padding: 8px 15px;
+                    background-color: #fbfbfb;
+                    border: 1px solid #ddd;
+                    margin-left: -1px;
+
+                    &:focus, &:active {
+                        outline: none;
+                    }
+                }
+            }
+
+            @media (max-width: @screen-sm) {
+                margin: 0;
+
+                > li {
+                    display: none;
+
+                    &:first-of-type, &:last-of-type {
+                        display: inline-block;
+                        font-size: 1rem;
+                        line-height: 1;
+                    }
+                }
+            }
+        }
+    }
+}

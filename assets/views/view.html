@@ -1,0 +1,89 @@
+<div id="preview-container" ng-if="!passContainerVisible">
+    <section id="preview-file">
+        <div class="info-bar" ng-if="!passContainerVisible">
+            <div class="logo" ui-sref="home"><img ng-src="{{:: baseUrl+'assets/images/logo_dark.png' }}" alt="logo"/></div>
+
+            <div class="logged-in-container" ng-show="users.current" data-toggle="dropdown">
+                <div class="dropdown">
+                    <img ng-src="{{ users.getAvatar() }}"/>
+                    <a href="">{{ users.getUsernameForCurrentUser() }}</a>
+                    <span class="caret"></span>
+                    <ul class="dropdown-menu">
+                        <li ng-if="users.current.isAdmin" ui-sref="admin.analytics"><a href=""><i class="icon icon-lock-filled"></i>{{:: 'adminArea' | translate }}</a></li>
+                        <li ui-sref="dashboard.folders"><a href=""><i class="icon icon-gauge"></i>{{:: 'dashboard' | translate }}</a></li>
+                        <li ng-click="users.showAccountSettingsModal($event, 'username')"><a href=""><i class="icon icon-pencil"></i> {{:: 'editUsername' | translate }}</a></li>
+                        <li ng-click="users.showAccountSettingsModal($event, 'avatar')"><a href=""><i class="icon icon-emo-sunglasses"></i> {{:: 'changeAvatar' | translate }}</a></li>
+                        <li class="separator"></li>
+                        <li ng-click="users.showAccountSettingsModal($event)"><a href=""><i class="icon icon-cog"></i> {{:: 'accountSettings' | translate }}</a></li>
+                        <li ng-click="users.logout()"><a href=""><i class="icon icon-login"></i> {{:: 'logOut' | translate }}</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="login-buttons" ng-if="!users.current">
+                <md-button ui-sref="register" ng-if="utils.getSetting('enableRegistration', true)">{{:: 'register' | translate }}</md-button>
+                <md-button ui-sref="login" class="md-primary md-raised">{{:: 'login' | translate }}</md-button>
+            </div>
+
+            <div class="actions">
+                <md-button ng-click="selectedItems.download([shareable])" class="md-primary md-raised">{{:: 'download' | translate }}</md-button>
+            </div>
+        </div>
+        <div class="ad-container" ng-if="ad1" ng-bind-html="ad1"></div>
+        <div class="shareable-preview" ng-class="{ 'ad-above': ad1 }" ng-if="previewStatus.open" file-preview-container>
+            <div class="file-preview-inner">
+                <div class="content">
+                    <div class="preview"></div>
+                    <div class="no-preview-available">
+                        <div class="message">{{:: noFilePreview | translate }}</div>
+                        <div class="buttons"><md-button class="md-raised md-primary" ng-click="selectedItems.download()"><i class="icon icon-download"></i> {{:: 'download' | translate }}</md-button></div>
+                    </div>
+                </div>
+                <div class="next-item"><i class="icon icon-right-open-mini"></i></div>
+                <div class="prev-item"><i class="icon icon-left-open-mini"></i></div>
+                <div class="preview-loader">
+                    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="name"><i class="icon icon-{{ fileTypes.getMimeIcon(shareable.mime) }}"></i> {{ shareable.name }}</div>
+            <div class="description">{{ getSize() }}</div>
+        </div>
+    </section>
+    <section id="preview-sidebar" toggle-preview-sidebar>
+        <ed-share-icons></ed-share-icons>
+        <ed-disqus></ed-disqus>
+        <div class="ad-container" ng-if="ad2" ng-bind-html="ad2"></div>
+    </section>
+    <md-button class="md-fab md-primary toggle-comments">
+        <md-icon md-font-icon="icon icon-comment-alt"></md-icon>
+    </md-button>
+</div>
+
+<div id="password-outter-container" ng-if="passContainerVisible">
+    <section id="photo-password-container">
+
+        <div class="logo"><img ng-src="{{ baseUrl+'assets/images/logo_dark.png' }}" class="img-responsive" alt="logo"/></div>
+
+        <p ng-if="type == 'photo'">{{:: 'photoPassMessage' | translate }}</p>
+        <p ng-if="type == 'folder'">{{:: 'albumPassMessage' | translate }}</p>
+
+        <form ng-submit="checkPassword()" name="passwordForm">
+            <md-input-container>
+                <label for="password">{{:: 'password' | translate }}</label>
+                <input ng-model="$parent.password" name="password" id="password" type="password" required>
+                <div class="error" ng-if="$parent.error">{{ $parent.error }}</div>
+            </md-input-container>
+
+            <div class="pull-right">
+                <md-button type="button" ng-click="goHome()">{{:: 'cancel' | translate }}</md-button>
+                <md-button type="submit" class="md-primary md-raised">{{:: 'view' | translate }}</md-button>
+            </div>
+        </form>
+    </section>
+</div>
+
+<ul id="context-menu" ed-context-menu></ul>
+<div ng-include="'assets/views/modals.html'"></div>

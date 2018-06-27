@@ -1,0 +1,51 @@
+#test-menu {
+    position: absolute;
+    display: block !important;
+}
+
+#context-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    width: 255px;
+    .md-whiteframe-z2();
+    padding: 10px 0 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 99;
+    .user-select(none);
+    list-style: none;
+
+    .context-menu-item {
+        padding: 5px 10px;
+        cursor: pointer;
+        color: darken(#8F8F8F, 20%);
+        border-left: 5px solid transparent;
+
+        &:hover {
+            background-color: @main-gray;
+            border-left: 5px solid #8F8F8F;
+        }
+    }
+
+    .icon {
+        font-size: 20px;
+        vertical-align: middle;
+        margin: 0 10px 0 2px;
+        color: #9AACB5;
+    }
+
+    .icon-trash {
+        color: @primary-palette;
+    }
+
+    .icon-share {
+        color: #44a8ee;
+    }
+
+    .separator {
+        background-color: @gray-lighter;
+        height: 1px;
+        padding: 0;
+    }
+}

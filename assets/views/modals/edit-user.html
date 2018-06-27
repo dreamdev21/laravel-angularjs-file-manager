@@ -1,0 +1,54 @@
+<md-dialog class="md-modal md-modal-wide user-modal">
+<div class="md-modal-header">
+	<h1>{{:: 'createNewUser' | translate }}</h1>
+	<div ng-click="users.closeModal()" class="md-close-modal"><i class="mdi mdi-close"></i></div>
+</div>
+<form ng-submit="submit()">
+
+	<div class="errors"></div>
+
+	<md-input-container>
+	<label for="email">{{:: 'email' | translate }}</label>
+	<input id="email" type="email" ng-model="userModel.email">
+</md-input-container>
+
+<div layout layout-sm="column">
+	<md-input-container flex>
+	<label for="password">{{:: 'password' | translate }}</label>
+	<input id="password" type="password" ng-model="userModel.password">
+</md-input-container>
+
+<md-input-container flex>
+<label for="repeatPassword">{{:: 'repeatPassword' | translate }}</label>
+<input id="repeatPassword" type="password" ng-model="userModel.password_confirmation">
+</md-input-container>
+</div>
+
+<md-input-container>
+<label for="username">{{:: 'username' | translate }}</label>
+<input id="username" type="text" ng-model="userModel.username">
+</md-input-container>
+
+<div layout layout-sm="column">
+	<md-input-container flex>
+	<label for="first_name">{{:: 'firstName' | translate }}</label>
+	<input id="first_name" type="text" ng-model="userModel.first_name">
+</md-input-container>
+
+<md-input-container flex>
+<label for="last_name">{{:: 'lastName' | translate }}</label>
+<input id="last_name" type="text" ng-model="userModel.last_name">
+</md-input-container>
+</div>
+
+<md-select placeholder="Gender" ng-model="userModel.gender">
+<md-option value="male" translate>male</md-option>
+<md-option value="female" translate>female</md-option>
+</md-select>
+
+<div class="buttons">
+	<md-button type="button" ng-click="users.closeModal()">{{:: 'cancel' | translate }}</md-button>
+	<md-button type="submit" class="md-primary md-raised" translate>{{ type }}</md-button>
+</div>
+</form>
+</md-dialog>

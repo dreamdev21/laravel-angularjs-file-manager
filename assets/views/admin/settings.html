@@ -1,0 +1,394 @@
+<div class="settings-container">
+
+    <ul class="nav nav-pills nav-stacked">
+        <li ed-scroll-spy data-target="#homepage"><a href="">{{:: 'homepage' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#meta"><a href="">{{:: 'generalSettings' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#payments"><a href="">{{:: 'payments' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#validation"><a href="">{{:: 'uploadsAndDashboard' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#users"><a href="">{{:: 'users' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#mail"><a href="">{{:: 'mail' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#filesystem"><a href="">{{:: 'filesystem' | translate }}</a></li>
+        <li ed-scroll-spy data-target="#keys"><a href="">{{:: '3rdPartyServiceKeys' | translate }}</a></li>
+    </ul>
+
+    <form ng-submit="updateSettings()">
+        <section class="settings-panel" id="homepage">
+            <div class="settings-panel-header"><i class="icon icon-users"></i> {{:: 'homepage' | translate }}</div>
+            <div class="settings-panel-body">
+
+                <section class="settings-select">
+                    <div class="select-label">{{:: 'homepage' | translate }}</div>
+                    <md-select ng-model="settings.homepage">
+                        <md-option value="landing" translate>landingPage</md-option>
+                        <md-option value="login" translate>loginPage</md-option>
+                        <md-option value="custom" translate>customPage</md-option>
+                    </md-select>
+                    <p>{{:: 'homepageExpl' | translate }}</p>
+                </section>
+
+                <md-input-container ng-if="settings.homepage === 'custom'">
+                    <label>{{:: 'customHomepagePath' | translate }}</label>
+                    <input ng-model="settings.customHomePath"/>
+                    <p>{{:: 'customHomepagePathExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'homeTagline' | translate }}</label>
+                    <input ng-model="settings.homeTagline"/>
+                    <p>{{:: 'homeTaglineExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'homeByline' | translate }}</label>
+                    <input ng-model="settings.homeByline"/>
+                    <p>{{:: 'homeBylineExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'homeButtonText' | translate }}</label>
+                    <input ng-model="settings.homeButtonText"/>
+                    <p>{{:: 'homeButtonTextExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="meta">
+            <div class="settings-panel-header">{{:: 'generalSettings' | translate }}</div>
+            <div class="settings-panel-body">
+                <md-input-container>
+                    <label>{{:: 'siteName' | translate }}</label>
+                    <input ng-model="settings.siteName"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'siteUrl' | translate }}</label>
+                    <input ng-model="settings.env.base_url"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'metaTitle' | translate }}</label>
+                    <input ng-model="settings.metaTitle"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'metaDescription' | translate }}</label>
+                    <textarea ng-model="settings.metaDescription"></textarea>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'dateLocale' | translate }}</label>
+                    <input ng-model="settings.dateLocale"/>
+                    <p>{{:: 'dateLocaleExpl' | translate }} <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">Wikipedia</a></p>
+                </md-input-container>
+
+                <section class="settings-select">
+                    <div class="select-label">{{:: 'enablePushState' | translate }}</div>
+                    <md-select ng-model="settings.enablePushState">
+                        <md-option value="1" translate>yes</md-option>
+                        <md-option value="0" translate>no</md-option>
+                    </md-select>
+                </section>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="payments">
+            <div class="settings-panel-header">{{:: 'payments' | translate }}</div>
+            <div class="settings-panel-body">
+                <section class="settings-select">
+                    <div class="select-label">{{:: 'enablePaymentsSystem' | translate }}</div>
+                    <md-select ng-model="settings.enablePayments">
+                        <md-option value="1" translate>yes</md-option>
+                        <md-option value="0" translate>no</md-option>
+                    </md-select>
+                    <p>{{:: 'enablePaymentsSystemExpl' | translate }}</p>
+                </section>
+
+                <md-input-container>
+                    <label>{{:: 'freePlanSpace' | translate }}</label>
+                    <input ng-model="settings.maxUserSpace"/>
+                    <p>{{:: 'maxUserSpaceExpl' | translate }} <a target="_blank" href="http://www.whatsabyte.com/P1/byteconverter.htm">{{:: 'converter' | translate }}</a></p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'invoiceProduct' | translate }}</label>
+                    <input ng-model="settings.invoiceProduct"/>
+                    <p>{{:: 'invoiceProductExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'invoiceVendor' | translate }}</label>
+                    <input ng-model="settings.invoiceVendor"/>
+                    <p>{{:: 'invoiceVendorExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="validation">
+            <div class="settings-panel-header">{{:: 'uploadsAndDashboard' | translate }}</div>
+            <div class="settings-panel-body">
+                <md-input-container>
+                    <label>{{:: 'maxFileSize' | translate }}</label>
+                    <input ng-model="settings.maxFileSize"/>
+                    <p>
+                        <span>{{:: 'maxFileSizeExpl' | translate }}</span>
+                        <br>
+                        <span class="info">Note that this setting only controls maximum file size in BeDrive. Current maximum upload file size on your server is <strong>{{ max_server_upload_size }}</strong>. <br>
+                            You will need to modify your server configuration or contact your hosting provider to allow uploads of files larger then <strong>{{ max_server_upload_size }}</strong>.</span>
+                    </p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'whitelist' | translate }}</label>
+                    <input ng-model="settings.whitelist"/>
+                    <p>{{:: 'whitelistExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'blacklist' | translate }}</label>
+                    <input ng-model="settings.blacklist"/>
+                    <p>{{:: 'blacklistExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'maxSimultUploads' | translate }}</label>
+                    <input ng-model="settings.maxSimultUploads"/>
+                    <p>{{:: 'maxSimultUploadsExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'dashboardNumOfFiles' | translate }}</label>
+                    <input ng-model="settings.dash_files_num"/>
+                    <p>{{:: 'dashboardNumOfFilesExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="users">
+            <div class="settings-panel-header"><i class="icon icon-users"></i> {{:: 'users' | translate }}</div>
+            <div class="settings-panel-body">
+
+                <section class="settings-select">
+                    <div class="select-label">{{:: 'enableRegistration' | translate }}</div>
+                    <md-select ng-model="settings.enableRegistration">
+                        <md-option value="1" translate>yes</md-option>
+                        <md-option value="0" translate>no</md-option>
+                    </md-select>
+                    <p>{{:: 'enableRegistrationExpl' | translate }}</p>
+                </section>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="mail">
+            <div class="settings-panel-header"><i class="icon icon-users"></i> {{:: 'mail' | translate }}</div>
+            <div class="settings-panel-body">
+
+                <section class="settings-select">
+                    <div class="select-label">{{:: 'mailDriver' | translate }}</div>
+                    <md-select ng-model="settings.env.mail_driver">
+                        <md-option value="smtp">SMTP</md-option>
+                        <md-option value="mail">Mail</md-option>
+                        <md-option value="sendmail">Send Mail</md-option>
+                        <md-option value="mailgun">Mailgun</md-option>
+                        <md-option value="mandrill">Mandrill</md-option>
+                        <md-option value="log">Log</md-option>
+                    </md-select>
+                    <p>{{:: 'mailDriverExpl' | translate }}</p>
+                </section>
+
+                <md-input-container ng-if="regularMailDrivers.indexOf(settings.env.mail_driver) > -1">
+                    <label>{{:: 'host' | translate }}</label>
+                    <input ng-model="settings.env.mail_host" type="text"/>
+                </md-input-container>
+
+                <md-input-container ng-if="regularMailDrivers.indexOf(settings.env.mail_driver) > -1">
+                    <label>{{:: 'port' | translate }}</label>
+                    <input ng-model="settings.env.mail_port" type="text"/>
+                </md-input-container>
+
+                <md-input-container ng-if="regularMailDrivers.indexOf(settings.env.mail_driver) > -1">
+                    <label>{{:: 'mailUsername' | translate }}</label>
+                    <input ng-model="settings.env.mail_username" type="text"/>
+                </md-input-container>
+
+                <md-input-container ng-if="regularMailDrivers.indexOf(settings.env.mail_driver) > -1">
+                    <label>{{:: 'mailPassword' | translate }}</label>
+                    <input ng-model="settings.env.mail_password" type="text"/>
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.mail_driver === 'mandrill'">
+                    <label>Mandrill API Key</label>
+                    <input ng-model="settings.mandrill_api_key" type="password">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.mail_driver === 'mailgun'">
+                    <label>Mailgun Domain</label>
+                    <input ng-model="settings.env.mailgun_domain" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.mail_driver === 'mailgun'">
+                    <label>Mailgun Secret</label>
+                    <input ng-model="settings.env.mailgun_secret" type="text">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'fromAddress' | translate }}</label>
+                    <input ng-model="settings.env.mail_from_address" type="text"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'fromName' | translate }}</label>
+                    <input ng-model="settings.env.mail_from_name" type="text"/>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="filesystem">
+            <div class="settings-panel-header"><i class="icon icon-users"></i> {{:: 'filesystem' | translate }}</div>
+            <div class="settings-panel-body">
+
+                <section class="settings-select">
+                    <div class="select-label">{{:: 'defaultFilesystem' | translate }}</div>
+                    <md-select ng-model="settings.env.filesystem_default">
+                        <md-option value="local">Locally</md-option>
+                        <md-option value="s3">Amazon S3</md-option>
+                        <md-option value="rackspace">Rackspace</md-option>
+                        <md-option value="dropbox">Dropbox</md-option>
+                    </md-select>
+                    <p>{{:: 'filesystemExpl' | translate }}</p>
+                </section>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 's3'">
+                    <label>Amazon S3 Key</label>
+                    <input ng-model="settings.env.s3_key" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 's3'">
+                    <label>Amazon S3 Secret</label>
+                    <input ng-model="settings.env.s3_secret" type="password">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 's3'">
+                    <label>Amazon S3 Region</label>
+                    <input ng-model="settings.env.s3_region" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 's3'">
+                    <label>Amazon S3 Bucket</label>
+                    <input ng-model="settings.env.s3_bucket" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 'rackspace'">
+                    <label>Rackspace Username</label>
+                    <input ng-model="settings.env.rackspace_username" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 'rackspace'">
+                    <label>Rackspace Key</label>
+                    <input ng-model="settings.env.rackspace_key" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 'rackspace'">
+                    <label>Rackspace Container</label>
+                    <input ng-model="settings.env.rackspace_container" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 'rackspace'">
+                    <label>Rackspace Region</label>
+                    <input ng-model="settings.env.rackspace_region" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 'dropbox'">
+                    <label>Dropbox Access Token</label>
+                    <input ng-model="settings.env.dropbox_access_token" type="text">
+                </md-input-container>
+
+                <md-input-container ng-if="settings.env.filesystem_default === 'dropbox'">
+                    <label>Dropbox Client Identifier</label>
+                    <input ng-model="settings.env.dropbox_client_identifier" type="text">
+                </md-input-container>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+
+        <section class="settings-panel" id="keys">
+            <div class="settings-panel-header clearfix">
+                <div class="pull-left">
+                    {{:: '3rdPartyServiceKeys' | translate }}
+                    <p class="setting-info">{{:: 'socialLoginKeysExpl' | translate }}</p>
+                </div>
+                <md-button type="button" class="md-primary md-raised pull-right" show-admin-keys>{{:: 'showKeys' | translate }}</md-button>
+            </div>
+            <div class="settings-panel-body">
+                <md-input-container>
+                    <label>{{:: 'stripePubKey' | translate }}</label>
+                    <input ng-model="settings.stripePubKey" type="password">
+                    <p>{{:: 'stripePubKeyExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'stripeSecretKey' | translate }}</label>
+                    <input ng-model="settings.env.stripe_secret_key" type="password">
+                    <p>{{:: 'stripePubKeyExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'disqusShortname' | translate }}</label>
+                    <input ng-model="settings.disqusShortname" type="password">
+                    <p>{{:: 'disqusShortnameExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Facebook {{:: 'id' | translate }}</label>
+                    <input ng-model="settings.env.facebook_id" type="password"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Facebook {{:: 'secret' | translate }}</label>
+                    <input ng-model="settings.env.facebook_secret" type="password"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Twitter {{:: 'id' | translate }}</label>
+                    <input ng-model="settings.env.twitter_id" type="password"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Twitter {{:: 'secret' | translate }}</label>
+                    <input ng-model="settings.env.twitter_secret" type="password"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Google {{:: 'id' | translate }}</label>
+                    <input ng-model="settings.env.google_id" type="password"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Google {{:: 'secret' | translate }}</label>
+                    <input ng-model="settings.env.google_secret" type="password"/>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>{{:: 'googleAnalyticsCode' | translate }}</label>
+                    <input ng-model="settings.analytics" type="password">
+                    <p>{{:: 'googleAnalyticsCodeExpl' | translate }}</p>
+                </md-input-container>
+
+                <md-button class="md-primary md-raised" type="submit">{{:: 'update' | translate }}</md-button>
+            </div>
+        </section>
+    </form>
+</div>
+

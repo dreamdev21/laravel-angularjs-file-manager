@@ -1,0 +1,38 @@
+.links-container {
+    .link-label {
+        color: rgba(0,0,0,0.54);
+    }
+
+    .link-input {
+        width: 100%;
+        height: 46px;
+        line-height: 1.4;
+        border: 2px solid rgba(0,39,59,.2);
+        border-radius: 3px;
+        color: rgba(0,39,59,.7);
+        font-weight: 500;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+
+    .link-sizes-nav {
+        list-style: none;
+        padding: 0;
+        .user-select(none);
+
+        > li {
+            display: inline-block;
+            padding: 0 5px;
+            color: #007BE4;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+
+            &.active {
+                color: @primary-palette;
+            }
+        }
+    }
+}

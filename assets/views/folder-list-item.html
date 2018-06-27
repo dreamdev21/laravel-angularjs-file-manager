@@ -1,0 +1,19 @@
+<ul class="list-unstyled">
+    <li class="folder"
+        ng-repeat="folder in (allFolders || folders.available) track by folder.id"
+        ng-click="folders.open(folder.share_id); $event.stopPropagation();"
+        ng-if="folder.isRootChild"
+        data-name="{{:: folder.name }}"
+        data-id="{{:: folder.id }}"
+        ed-context-menu-item
+    >
+        <div class="folder-name" ng-class="{ open: folders.selected.name === folder.name }">
+            <i class="icon icon-folder"></i> {{:: folder.name }} <i class="icon toggle-icon icon-right-dir"></i>
+        </div>
+        <div ng-switch on="folder.children">
+            <div ng-switch-when="true">
+                <div style="text-indent: {{ 2.5*level }}px" data-level="{{level}}" ng-init="allFolders = folder.children.split('.'); level = level + 1;" ng-include="'assets/views/folder-child-list-item.html'"></div>
+            </div>
+        </div>
+    </li>
+</ul>
